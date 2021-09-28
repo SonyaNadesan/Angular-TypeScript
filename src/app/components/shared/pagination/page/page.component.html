@@ -1,0 +1,9 @@
+<ng-container *ngIf="isCurrentPage; then currentPage; else notCurrentPage"></ng-container>
+
+<ng-template #currentPage>
+    <button  class="btn btn-primary"  name="page" value={{isCurrentPage}} (click)="onPageClick(pageNumber)">{{pageNumber}}</button>
+</ng-template>
+
+<ng-template #notCurrentPage>
+    <button  class="btn btn-link"  name="page" value={{isCurrentPage}} (click)="onPageClick(pageNumber)">{{pageNumber}}</button>
+</ng-template>

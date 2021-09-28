@@ -1,0 +1,11 @@
+<div  class="inline-block form-inline">
+    <input type="hidden" name="startPage" value={{startPage}}>
+    
+    <PreviousButton [startPage]="startPage" [maxNumberOfPagesToShowOnEachRequest]="maxNumberOfPagesToShowOnEachRequest" 
+        [numberOfPages]="numberOfPages" (pageClickEvent)="onPageClick($event)"></PreviousButton>
+    
+    <Pages [startPage]="startPage" [lastPage]="lastPage" [currentPage]="currentPage" (pageClickEvent)="onPageClick($event)"></Pages>
+    
+    <NextButton [numberOfPages]="numberOfPages" [lastPage]="lastPage" 
+    [maxNumberOfPagesToShowOnEachRequest]="maxNumberOfPagesToShowOnEachRequest" (pageClickEvent)="onPageClick($event)"></NextButton>
+</div>

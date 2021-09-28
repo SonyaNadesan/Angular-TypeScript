@@ -1,0 +1,9 @@
+<div className="form-group">
+    <label>{{label}}</label>
+    <ng-container *ngIf="items != undefined && items != undefined">
+        <ng-container *ngFor="let item of items">
+            <CheckBox [checked]="selectedValues.includes(item)" [option]="item"
+             (onChangeEvent)="onChange(item)"></CheckBox>
+        </ng-container>
+    </ng-container>
+</div>

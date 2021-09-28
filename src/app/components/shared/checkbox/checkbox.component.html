@@ -1,0 +1,8 @@
+<label class="checkbox-inline">
+    {{option.value}}
+    <input type="checkbox"
+     [value]="option.key" 
+     [checked]="checked"
+     (change)="onChange(option)"
+     >
+</label>

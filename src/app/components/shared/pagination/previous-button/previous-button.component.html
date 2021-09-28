@@ -1,0 +1,9 @@
+<ng-container *ngIf="showPreviousButton; then show">
+</ng-container>
+
+<ng-template #show>
+    <button class="btn btn-link"   name="page" value={{previousPage}} 
+     (click)="onPageClick(previousPage)">
+     <span class="fas fa-chevron-left"></span>
+    </button>
+</ng-template>

@@ -1,0 +1,13 @@
+<div className="form-group">
+    <label>{{label}}</label>
+    <ng-container *ngFor="let item of items">
+        <label className="checkbox-inline">
+            {{item.value}}
+            <input type="radio"
+                   [name]="radioButtonGroupName"
+                   [value]="item.key" 
+                   [checked]="selectedValue == item.key"
+                   (change)="onChange(item)">
+        </label>
+    </ng-container>
+</div>

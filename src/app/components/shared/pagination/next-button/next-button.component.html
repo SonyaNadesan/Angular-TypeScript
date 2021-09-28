@@ -1,0 +1,9 @@
+<ng-container *ngIf="showNextButton; then show">
+</ng-container>
+
+<ng-template #show>
+    <button class="btn btn-link"  name="page" value={{nextPage}} 
+     (click)="onPageClick(nextPage)">
+     <span class="fas fa-chevron-right"></span>
+    </button>
+</ng-template>

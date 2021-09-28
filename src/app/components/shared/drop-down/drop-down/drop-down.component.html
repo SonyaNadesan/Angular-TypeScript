@@ -1,0 +1,9 @@
+<div class="dropdown fullWidth">
+    <button class="btn btn dropdown-toggle fullWidth" type="button" data-toggle="dropdown">{{ label }}
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu fullWidth">
+      <ng-container *ngFor="let item of items">
+        <li><a href="#" (click)="onChange(item.key)">{{item.value}}</a></li>
+      </ng-container>
+    </ul>
+</div>
