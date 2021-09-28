@@ -35,6 +35,16 @@ export class AppComponent {
     new KeyValuePair<number, string>(3, "c"),
   ];
 
+  columns: KeyValuePair<string, string>[] = [
+    new KeyValuePair<string, string>("name", "First Name"),
+    new KeyValuePair<string, string>("age", "Age")
+  ];
+  items: any[] = [
+    { name: 'Sonya', age: 25, colour:'blue'},
+    { name: 'Sofya', age: 25, colour:'red'},
+    { name: 'Faith', age: 28, colour:'yellow'}
+  ];
+
   firstCombo(event: KeyValuePair<number, string>){
     alert(event.value);
   }

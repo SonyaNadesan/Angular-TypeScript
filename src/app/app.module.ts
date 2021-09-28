@@ -11,6 +11,7 @@ import { DropDownComponent } from './components/shared/drop-down/drop-down/drop-
 import { CheckboxesComponent } from './components/shared/checkboxes/checkboxes.component';
 import { CheckboxComponent } from './components/shared/checkbox/checkbox.component';
 import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobuttons.component';
+import { TableComponent } from './components/shared/table/table.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobut
     DropDownComponent,
     CheckboxesComponent,
     CheckboxComponent,
-    RadiobuttonsComponent
+    RadiobuttonsComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule

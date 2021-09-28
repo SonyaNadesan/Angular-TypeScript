@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+        <tr>
+            <ng-container *ngFor="let column of columns">
+                <th>{{column.value}}</th>
+            </ng-container>
+        </tr>
+        <tbody>
+            <ng-container *ngFor="let row of rows">
+                <tr>
+                    <ng-container *ngFor="let cell of row">
+                        <td>{{cell}}</td>
+                    </ng-container>
+                </tr>
+            </ng-container>
+        </tbody>
+</table>
