@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { KeyValuePair } from './components/KeyValuePair';
+import { TextValuePair } from './components/TextValuePair';
 
 @Component({
   selector: 'app-root',
@@ -14,50 +14,66 @@ export class AppComponent {
   maxNumberOfPagesToShowOnEachRequest: number = 10;
 
   label:string = "Select an Option";
-  options:KeyValuePair<number, string>[] = [
-    new KeyValuePair<number, string>(1, "a"),
-    new KeyValuePair<number, string>(2, "b"),
-    new KeyValuePair<number, string>(3, "c"),
+  options:TextValuePair<number, string>[] = [
+    new TextValuePair<number, string>(1, "a"),
+    new TextValuePair<number, string>(2, "b"),
+    new TextValuePair<number, string>(3, "c"),
   ];
 
   checkboxGroupTitle: string = "Checkboxes!";
-  checkboxOptions: KeyValuePair<number, string>[] = [
-    new KeyValuePair<number, string>(1, "a"),
-    new KeyValuePair<number, string>(2, "b"),
-    new KeyValuePair<number, string>(3, "c"),
+  checkboxOptions: TextValuePair<number, string>[] = [
+    new TextValuePair<number, string>(1, "a"),
+    new TextValuePair<number, string>(2, "b"),
+    new TextValuePair<number, string>(3, "c"),
   ];
 
   radioButtonGroupTitle: string = "Radio Buttons!";
   radioButtonGroup:string = "RadioButtonGroup";
-  radioButtonOptions: KeyValuePair<number, string>[] = [
-    new KeyValuePair<number, string>(1, "a"),
-    new KeyValuePair<number, string>(2, "b"),
-    new KeyValuePair<number, string>(3, "c"),
+  radioButtonOptions: TextValuePair<number, string>[] = [
+    new TextValuePair<number, string>(1, "a"),
+    new TextValuePair<number, string>(2, "b"),
+    new TextValuePair<number, string>(3, "c"),
   ];
 
-  columns: KeyValuePair<string, string>[] = [
-    new KeyValuePair<string, string>("name", "First Name"),
-    new KeyValuePair<string, string>("age", "Age")
+  columns: TextValuePair<string, string>[] = [
+    new TextValuePair<string, string>("First Name", "name"),
+    new TextValuePair<string, string>("Age", "age")
   ];
   items: any[] = [
-    { name: 'Sonya', age: 25, colour:'blue'},
-    { name: 'Sofya', age: 25, colour:'red'},
-    { name: 'Faith', age: 28, colour:'yellow'}
+    new Person('Sonya',  25, 'blue'),
+    new Person('Sofya',  25, 'red'),
+    new Person('Faith',  28, 'yellow'),
   ];
 
-  firstCombo(event: KeyValuePair<number, string>){
+  firstCombo(event: TextValuePair<number, string>){
     alert(event.value);
   }
 
-  secondCombo(event: KeyValuePair<number, string>){
+  secondCombo(event: TextValuePair<number, string>){
     alert("Hello " + event.value);
   }
 
-  checkboxExample(event: KeyValuePair<number, string>[]){
+  checkboxExample(event: TextValuePair<number, string>[]){
     alert(event.map(x => x.value).join());
   }
 
-  radioButtonExample(event: KeyValuePair<number, string>){
+  radioButtonExample(event: TextValuePair<number, string>){
     alert("radio...." + event.value);
+  }
+
+  rowClick(item: Person){
+    alert(item.colour);
+  }
+}
+
+export class Person{
+  name: string;
+  age: number;
+  colour: string;
+
+  constructor(name: string, age: number, colour:string) {
+    this.name = name;
+    this.age = age;
+    this.colour = colour;
   }
 }

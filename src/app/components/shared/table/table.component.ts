@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { KeyValuePair } from '../../KeyValuePair';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TextValuePair } from '../../TextValuePair';
 
 @Component({
   selector: 'Table',
@@ -8,8 +8,10 @@ import { KeyValuePair } from '../../KeyValuePair';
 })
 export class TableComponent implements OnInit {
 
-  @Input() public columns: KeyValuePair<string, string>[];
+  @Input() public columns: TextValuePair<string, string>[];
   @Input() public items: any[] = [];
+
+  @Output() onRowClickEvent: EventEmitter<any> = new EventEmitter<any>();
 
   rows: any[] = [];
 
@@ -17,12 +19,18 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.items == undefined || this.items == null){
-      for (const [key, value] of Object.entries(this.items[0])) {
-        let column = new KeyValuePair<string, string>(key, key);
+      for (const [propertyName, propertyValue] of Object.entries(this.items[0])) {
+        let column = new TextValuePair<string, string>(propertyName, propertyName);
         this.columns.push(column);
       }
     }
 
-    this.rows = this.items.map(x => this.columns.map(c => x[c.key]));
+    this.rows = this.items.map(x => this.columns.map(c => x[c.value]));
+  }
+
+  onRowClick(selectedRow: any){
+    let index = this.rows.indexOf(selectedRow);
+    let item = this.items[index];
+    this.onRowClickEvent.emit(item);
   }
 }

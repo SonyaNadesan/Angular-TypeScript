@@ -1,17 +1,17 @@
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <ng-container *ngFor="let column of columns">
-                <th>{{column.value}}</th>
+                <th>{{column.text}}</th>
             </ng-container>
         </tr>
-        <tbody>
-            <ng-container *ngFor="let row of rows">
-                <tr>
-                    <ng-container *ngFor="let cell of row">
-                        <td>{{cell}}</td>
-                    </ng-container>
-                </tr>
-            </ng-container>
-        </tbody>
+    <tbody>
+        <ng-container *ngFor="let row of rows">
+            <tr (click)="onRowClick(row)">
+                <ng-container *ngFor="let cell of row">
+                    <td>{{cell}}</td>
+                </ng-container>
+            </tr>
+        </ng-container>
+    </tbody>
 </table>

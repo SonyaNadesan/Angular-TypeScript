@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { KeyValuePair } from '../../../KeyValuePair';
+import { TextValuePair } from '../../../TextValuePair';
 
 @Component({
   selector: 'DropDown',
@@ -8,22 +8,21 @@ import { KeyValuePair } from '../../../KeyValuePair';
 })
 export class DropDownComponent implements OnInit {
 
-  @Input() label:string = "Please Select";
-  @Input() items: KeyValuePair<any, any>[];
+  @Input() label:string;
+  @Input() items: TextValuePair<any, any>[];
 
-  @Output() onChangeEvent = new EventEmitter<KeyValuePair<any, any>>();
+  @Output() onChangeEvent = new EventEmitter<TextValuePair<any, any>>();
 
-  public selectedValue: any;
+  public selectedItem: TextValuePair<any, any>;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onChange(value: any){
-    this.selectedValue = value;
-    let keyValue = this.items.find(x => x.key == this.selectedValue);
-    this.label = keyValue?.value;
-    this.onChangeEvent.emit(keyValue);
+  onChange(textValuePair: TextValuePair<any, any>){
+    this.selectedItem = textValuePair;
+    this.label = textValuePair.value;
+    this.onChangeEvent.emit(this.selectedItem);
   }
 }

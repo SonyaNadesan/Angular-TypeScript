@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { KeyValuePair } from '../../KeyValuePair';
+import { TextValuePair } from '../../TextValuePair';
 
 @Component({
   selector: 'CheckBox',
@@ -9,19 +9,18 @@ import { KeyValuePair } from '../../KeyValuePair';
 export class CheckboxComponent implements OnInit {
 
   @Input() checked: boolean = false;
-  @Input() option: KeyValuePair<any, any>;
+  @Input() option: TextValuePair<any, any>;
 
-  @Output() onChangeEvent: EventEmitter<KeyValuePair<any, any>> = new EventEmitter<KeyValuePair<any, any>>();
+  @Output() onChangeEvent: EventEmitter<TextValuePair<any, any>> = new EventEmitter<TextValuePair<any, any>>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange(value: KeyValuePair<any, any>){
+  onChange(value: TextValuePair<any, any>){
     this.checked = !this.checked;
 
     this.onChangeEvent.emit(value);
   }
-
 }

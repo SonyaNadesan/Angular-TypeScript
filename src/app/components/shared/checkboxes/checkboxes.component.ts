@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { KeyValuePair } from '../../KeyValuePair';
+import { TextValuePair } from '../../TextValuePair';
 
 @Component({
   selector: 'CheckBoxes',
@@ -9,24 +9,24 @@ import { KeyValuePair } from '../../KeyValuePair';
 export class CheckboxesComponent implements OnInit {
 
   @Input() label: string;
-  @Input() items: KeyValuePair<any, any>[];
+  @Input() items: TextValuePair<any, any>[];
 
-  @Output() onChangeEvent: EventEmitter<KeyValuePair<any, any>[]> = new EventEmitter<KeyValuePair<any, any>[]>();
+  @Output() onChangeEvent: EventEmitter<TextValuePair<any, any>[]> = new EventEmitter<TextValuePair<any, any>[]>();
   
-  selectedValues:KeyValuePair<any, any>[] = [];
+  selectedValues:TextValuePair<any, any>[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange(event: KeyValuePair<any, any>){
-    let index = this.selectedValues.indexOf(event);
+  onChange(textValuePair: TextValuePair<any, any>){
+    let index = this.selectedValues.indexOf(textValuePair);
 
     if(index > -1){
       this.selectedValues.splice(index, 1);
     }else{
-      this.selectedValues.push(event);
+      this.selectedValues.push(textValuePair);
     }
 
     this.onChangeEvent.emit(this.selectedValues);

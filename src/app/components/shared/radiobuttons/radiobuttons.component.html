@@ -5,8 +5,8 @@
             {{item.value}}
             <input type="radio"
                    [name]="radioButtonGroupName"
-                   [value]="item.key" 
-                   [checked]="selectedValue == item.key"
+                   [value]="item.value" 
+                   [checked]="selectedItem == item"
                    (change)="onChange(item)">
         </label>
     </ng-container>

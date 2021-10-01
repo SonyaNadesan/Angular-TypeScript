@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { KeyValuePair } from '../../KeyValuePair';
+import { TextValuePair } from '../../TextValuePair';
 
 @Component({
   selector: 'RadioButtons',
@@ -9,20 +9,20 @@ import { KeyValuePair } from '../../KeyValuePair';
 export class RadiobuttonsComponent implements OnInit {
 
   @Input() label:string;
-  @Input() items: KeyValuePair<any, any>[];
-  @Input() selectedValue: KeyValuePair<any, any>;
+  @Input() items: TextValuePair<any, any>[];
+  @Input() selectedItem: TextValuePair<any, any>;
   @Input() radioButtonGroupName: string;
 
-  @Output() onChangeEvent: EventEmitter<KeyValuePair<any, any>> = new EventEmitter<KeyValuePair<any, any>>();
+  @Output() onChangeEvent: EventEmitter<TextValuePair<any, any>> = new EventEmitter<TextValuePair<any, any>>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange(item: KeyValuePair<any, any>){
-    this.selectedValue = item;
+  onChange(item: TextValuePair<any, any>){
+    this.selectedItem = item;
 
-    this.onChangeEvent.emit(this.selectedValue);
+    this.onChangeEvent.emit(this.selectedItem);
   }
 }

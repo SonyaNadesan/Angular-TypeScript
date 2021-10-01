@@ -3,7 +3,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu fullWidth">
       <ng-container *ngFor="let item of items">
-        <li><a href="#" (click)="onChange(item.key)">{{item.value}}</a></li>
+        <li><a href="#" (click)="onChange(item)">{{item.text}}</a></li>
       </ng-container>
     </ul>
 </div>
