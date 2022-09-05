@@ -12,6 +12,10 @@ import { CheckboxesComponent } from './components/shared/checkboxes/checkboxes.c
 import { CheckboxComponent } from './components/shared/checkbox/checkbox.component';
 import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobuttons.component';
 import { TableComponent } from './components/shared/table/table.component';
+import { DateBoxComponent } from './components/shared/dev-extreme/date-box/date-box.component';
+import { DateRangeBoxComponent } from './components/shared/dev-extreme/date-range-box/date-range-box.component';
+import dxDateBox from 'devextreme/ui/date_box';
+import { DxDateBoxModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -25,10 +29,13 @@ import { TableComponent } from './components/shared/table/table.component';
     CheckboxesComponent,
     CheckboxComponent,
     RadiobuttonsComponent,
-    TableComponent
+    TableComponent,
+    DateBoxComponent,
+    DateRangeBoxComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    DxDateBoxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

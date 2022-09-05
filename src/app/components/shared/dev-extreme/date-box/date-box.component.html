@@ -1,0 +1,8 @@
+<div class="dx-field">
+    <ng-container *ngIf="label">
+        <div class="dx-field-label">{{label}}</div>
+    </ng-container>
+    <div class="dx-field-value">
+        <dx-date-box [value]="selectedDate" (onValueChanged)="selectionChanged($event)" type="date"> </dx-date-box>
+    </div>
+</div>

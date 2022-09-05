@@ -35,3 +35,5 @@
  [items]="items"
  (onRowClickEvent)="rowClick($event)"
 ></Table>
+
+<DateRangeBox [dateRangeRule]="dateRangeRule" (dateRangeChangeEvent)="onDateRangeChanged($event)"></DateRangeBox>

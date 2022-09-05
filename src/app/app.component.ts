@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TextValuePair } from './components/TextValuePair';
+import { FromAndToDate } from './models/FromAndToDate';
+import { DateRangeRules } from './services/DateRange/Rules/DateRangeRules';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +47,8 @@ export class AppComponent {
     new Person('Faith',  28, 'yellow'),
   ];
 
+  dateRangeRule: DateRangeRules = DateRangeRules.Past;
+
   firstCombo(event: TextValuePair<number, string>){
     alert(event.value);
   }
@@ -63,6 +67,10 @@ export class AppComponent {
 
   rowClick(item: Person){
     alert(item.colour);
+  }
+
+  onDateRangeChanged(event: FromAndToDate){
+    alert(event.isValid ? "Valid" : event.message);
   }
 }
 
