@@ -8,11 +8,14 @@ Not only have I created components that can be used on any project (such as the 
 
 This project was set up to explore Angular and develop reusable components/services/helpers/models for Angular and TypeScript including:
 
-Pagination Component
-Checkboxes Component
-Radio Buttons Component
-Drop-Downs Component
-Basic Grids Component
-Date Range Fields Component (with validation)
-Date Models, Helpers and Date Range Rule Factory
+- Pagination Component
+- Checkboxes Component
+- Radio Buttons Component
+- Drop-Downs Component
+- Basic Grids Component
+- Date Range Fields Component (with validation)
+- Date Models, Helpers and Date Range Rule Factory
+- Global Search Feature for DxDataGrid
+- DxPivotGridBuilder & DxPivotGridFieldBuilder
+
 ...and many more!
