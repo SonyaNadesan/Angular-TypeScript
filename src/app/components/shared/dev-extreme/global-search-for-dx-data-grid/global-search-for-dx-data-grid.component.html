@@ -1,0 +1,6 @@
+<span style="padding:10px;overflow:hidden"><h6>Search:  </h6></span> 
+<span>
+  <input style="height:100%" type="text" id="FilterValue" class="form-control" [value]="filterValue" (keyup)="onFilter($event)"
+    aria-describedby="basic-addon3" />
+</span>
+<span><dx-button text="Clear" height="100%" hint="Clear Filter" (onClick)="clearFilter($event)" icon="clear"></dx-button></span>

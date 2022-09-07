@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { DxDataGridComponent } from 'devextreme-angular';
 import { TextValuePair } from './components/TextValuePair';
 import { FromAndToDate } from './models/FromAndToDate';
 import { DateRangeRules } from './services/DateRange/Rules/DateRangeRules';
@@ -9,6 +10,8 @@ import { DateRangeRules } from './services/DateRange/Rules/DateRangeRules';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+
   numberOfPages: number = 21;
   startPage:number = 1;
   lastPage:number = 10;
@@ -49,6 +52,15 @@ export class AppComponent {
 
   dateRangeRule: DateRangeRules = DateRangeRules.Past;
 
+  data: any = [
+    {name: "Sonya", dateOfBirth: new Date(1995, 10, 29), university: 'Kingston University', school:'WHSG'},
+    {name: "Sofya", dateOfBirth: new Date(1995, 10, 29), university: 'Kingston University', school:'WHSG'},
+    {name: "Yasin", dateOfBirth: new Date(1994, 10, 1), university: 'Kingston University', school:'x'},
+    {name: "Gordon", dateOfBirth: new Date(1970, 9, 11), university: 'Kingston University', school:'z'},
+    {name: "Sneha", dateOfBirth: new Date(1991, 0, 21), university: 'M University', school:'mhsg'},
+    {name: "Katie", dateOfBirth: new Date(1996, 0, 4), university: 'ox university', school:'WHSG'}
+  ];
+
   firstCombo(event: TextValuePair<number, string>){
     alert(event.value);
   }
@@ -71,6 +83,16 @@ export class AppComponent {
 
   onDateRangeChanged(event: FromAndToDate){
     alert(event.isValid ? "Valid" : event.message);
+  }
+
+  onFilter(condition:any){
+    this.dataGrid.instance.beginUpdate();
+    this.dataGrid.instance.filter(condition);
+    this.dataGrid.instance.endUpdate();
+  }
+
+  onClear(event: boolean){
+    this.dataGrid.instance.clearFilter();
   }
 }
 

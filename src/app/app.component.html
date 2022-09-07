@@ -1,39 +1,46 @@
-<Pagination [numberOfPages]="numberOfPages" [startPage]="startPage" [lastPage]="lastPage" [currentPage]="currentPage"
-    [maxNumberOfPagesToShowOnEachRequest]="maxNumberOfPagesToShowOnEachRequest"></Pagination>
-
-<br />
-
-<div style="width:20%">
-    <DropDown [label]="label" 
-              [items]="options"
-              (onChangeEvent)="firstCombo($event)"
-    ></DropDown>
+<div style="width:90%; margin-left:5%">
+    <Pagination [numberOfPages]="numberOfPages" [startPage]="startPage" [lastPage]="lastPage"
+        [currentPage]="currentPage" [maxNumberOfPagesToShowOnEachRequest]="maxNumberOfPagesToShowOnEachRequest">
+    </Pagination>
 
     <br />
 
-    <DropDown [label]="label" 
-              [items]="options"
-              (onChangeEvent)="secondCombo($event)"
-    ></DropDown>
+    <div style="width:20%">
+        <DropDown [label]="label" [items]="options" (onChangeEvent)="firstCombo($event)"></DropDown>
+
+        <br />
+
+        <DropDown [label]="label" [items]="options" (onChangeEvent)="secondCombo($event)"></DropDown>
+    </div>
+
+    <CheckBoxes [label]="checkboxGroupTitle" [items]="checkboxOptions" (onChangeEvent)="checkboxExample($event)">
+    </CheckBoxes>
+
+    <RadioButtons [label]="radioButtonGroupTitle" [items]="radioButtonOptions" [radioButtonGroupName]="radioButtonGroup"
+        (onChangeEvent)="radioButtonExample($event)"></RadioButtons>
+
+    <Table [columns]="columns" [items]="items" (onRowClickEvent)="rowClick($event)"></Table>
+
+    <DateRangeBox [dateRangeRule]="dateRangeRule" (dateRangeChangeEvent)="onDateRangeChanged($event)"></DateRangeBox>
+
 </div>
 
-<CheckBoxes
- [label]="checkboxGroupTitle"
- [items]="checkboxOptions"
- (onChangeEvent)="checkboxExample($event)"
-></CheckBoxes>
-
-<RadioButtons
- [label]="radioButtonGroupTitle"
- [items]="radioButtonOptions"
- [radioButtonGroupName]="radioButtonGroup"
- (onChangeEvent)="radioButtonExample($event)"
-></RadioButtons>
-
-<Table
- [columns]="columns"
- [items]="items"
- (onRowClickEvent)="rowClick($event)"
-></Table>
-
-<DateRangeBox [dateRangeRule]="dateRangeRule" (dateRangeChangeEvent)="onDateRangeChanged($event)"></DateRangeBox>
+<div style="width:90%; margin-left:5%">
+    <div style="width:40%">
+        <h3>Global Search Feature for DevExtreme Data Grid</h3>
+        <GlobalSearchForDxDataGridComponent [data]="data" (filterConditionChange)="onFilter($event)"
+            (clearFilterEvent)="onClear($event)"></GlobalSearchForDxDataGridComponent>
+    </div>
+    <div style="width:70%">
+        <dx-data-grid [dataSource]="data" [remoteOperations]="false" [allowColumnReordering]="false"
+            [rowAlternationEnabled]="false" [showBorders]="true">
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-paging [enabled]="false"></dxo-paging>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-sorting mode="none"></dxo-sorting>
+            <dxo-header-filter [visible]="false"></dxo-header-filter>
+            <dxo-load-panel [enabled]="false"></dxo-load-panel>
+        </dx-data-grid>
+    </div>
+</div>
