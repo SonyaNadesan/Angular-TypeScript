@@ -9,7 +9,7 @@ export class DateHelper{
         let monthAsString = month < 10 ? "0" + month : month;
 
         let day = date.getDate();
-        let dateAsString = day < 10 ? "0" + day : month;
+        let dateAsString = day < 10 ? "0" + day : day;
 
         simpleDate.dateForQueryParam = date.getFullYear() + "-" + monthAsString + "-" + dateAsString;
         return simpleDate;

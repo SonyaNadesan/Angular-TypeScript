@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DateHelper } from 'src/app/helpers/DateHelper';
 import { SimpleDate } from 'src/app/models/SimpleDate';
 
 @Component({
@@ -18,40 +19,21 @@ export class DateBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.selectedDateParam = this.formatDate(this.selectedDate);
+    let simpleDate = DateHelper.toSimpleDate(this.selectedDate);
 
-    let simpleDate = new SimpleDate();
-    simpleDate.date = this.selectedDate;
-    simpleDate.dateForQueryParam = this.selectedDateParam;
+    this.selectedDateParam = simpleDate.dateForQueryParam;
 
     this.dateChangedEvent.emit(simpleDate);
   }
 
   selectionChanged(event: any){
-    let date = <Date>(event.value);
+    this.selectedDate = <Date>(event.value);
 
-    let dateAsString = this.formatDate(date);
+    let simpleDate = DateHelper.toSimpleDate(this.selectedDate);
 
-    this.selectedDate = date;
-
-    this.selectedDateParam = dateAsString;
-
-    let simpleDate = new SimpleDate();
-    simpleDate.date = this.selectedDate;
-    simpleDate.dateForQueryParam = this.selectedDateParam;
+    this.selectedDateParam = simpleDate.dateForQueryParam;
 
     this.dateChangedEvent.emit(simpleDate);
-  }
-
-  private formatDate(date: Date) {
-    let yearAsString = date.getFullYear().toString();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    let monthAsString = month < 10 ? "0" + month.toString() : month.toString();
-    let dayAsString = day < 10 ? "0" + day.toString() : day.toString();
-
-    return yearAsString + "-" + monthAsString + "-" + dayAsString;
   }
 
 }
