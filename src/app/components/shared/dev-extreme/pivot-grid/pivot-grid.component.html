@@ -1,0 +1,16 @@
+<dx-pivot-grid
+    [id]="pivotGridId"
+    [allowSortingBySummary]="allowSortingBySummary"
+    [allowFiltering]="allowFiltering"
+    [showBorders]="showBorders"
+    [showColumnGrandTotals]="showColumnGrandTotals"
+    [showRowGrandTotals]="showRowGrandTotals"
+    [showRowTotals]="showRowTotals"
+    [showColumnTotals]="showColumnTotals"
+    [dataSource]="pivotGridDataSource"
+    (onCellClick)="onCellClick($event)" 
+    (onCellPrepared)="onCellPrepared($event)"
+  >
+    <dxo-field-chooser [enabled]="true" [height]="400"></dxo-field-chooser>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+  </dx-pivot-grid>

@@ -10,11 +10,13 @@ export class PivotGridDataSourceBuilder{
 
     setFields(fields: any[]): PivotGridDataSourceBuilder{
         this.fields = fields;
+        console.log("setting fields");
         return this;
     }
 
     setData<T>(data: T[]): PivotGridDataSourceBuilder{
         this.store.load = (e) => {
+            console.log("setting data");
             return data;
         };
 
@@ -24,11 +26,13 @@ export class PivotGridDataSourceBuilder{
     disableLocalCache(): PivotGridDataSourceBuilder{
         this.store.loadMode = "raw";
         this.store.cacheRawData = false;
+        console.log("setting loadMode and cacheRawData");
         return this;
     }
 
     enableRemoteOperations(enable: boolean = true){
         this.remoteOperations = enable;
+        console.log("setting remoteOperations");
         return this;
     }
     
@@ -41,6 +45,7 @@ export class PivotGridDataSourceBuilder{
             remoteOperations: this.remoteOperations 
         });
 
+        console.log("building");
         return this.pivotGridDataSource;
     }
 }

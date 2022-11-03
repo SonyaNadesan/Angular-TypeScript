@@ -14,10 +14,10 @@ import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobut
 import { TableComponent } from './components/shared/table/table.component';
 import { DateBoxComponent } from './components/shared/dev-extreme/date-box/date-box.component';
 import { DateRangeBoxComponent } from './components/shared/dev-extreme/date-range-box/date-range-box.component';
-import dxDateBox from 'devextreme/ui/date_box';
 import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxPivotGridModule } from 'devextreme-angular';
 import { GlobalSearchForDxDataGridComponent } from './components/shared/dev-extreme/global-search-for-dx-data-grid/global-search-for-dx-data-grid.component';
 import { DxoFieldPanelModule } from 'devextreme-angular/ui/nested';
+import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/pivot-grid.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { DxoFieldPanelModule } from 'devextreme-angular/ui/nested';
     TableComponent,
     DateBoxComponent,
     DateRangeBoxComponent,
-    GlobalSearchForDxDataGridComponent
+    GlobalSearchForDxDataGridComponent,
+    PivotGridComponent
   ],
   imports: [
     BrowserModule,

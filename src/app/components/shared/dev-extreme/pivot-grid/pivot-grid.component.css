@@ -1,0 +1,4 @@
+dx-pivot-grid /deep/ .selectedCell{
+    font-weight: bold;
+    border-bottom-color: darkgray;
+}

@@ -4,7 +4,7 @@ import { ReflectionService } from 'src/app/services/reflection.service';
 @Component({
   selector: 'GlobalSearchForDxDataGridComponent',
   templateUrl: './global-search-for-dx-data-grid.component.html',
-  styleUrls: ['./global-search-for-dx-data-grid.component.component.css']
+  styleUrls: ['./global-search-for-dx-data-grid.component.css']
 })
 export class GlobalSearchForDxDataGridComponent implements OnInit {
 
