@@ -13,10 +13,16 @@ This project was set up to explore Angular and develop reusable components/servi
 - Radio Buttons Component
 - Drop-Downs Component
 - Basic Grids Component
+- Expand/Collapse Panel Component
 - Date Range Fields Component (with validation)
 - Date Models, Helpers and Date Range Rule Factory
 - Global Search Feature for DxDataGrid
 - DxPivotGridBuilder & DxPivotGridFieldBuilder
 - Arrow Key Navigation for table structures including the DxPivotGrid
+- Creating/Loading/Deleting/ Grid States & Filter Sets (PivotGridConfigurationPanel, PivotGridFilterSetFeatures/PivotGridGriStateFeatures)
+- Setting Grid States as Default(PivotGridGriStateFeatures)
+- Copy Link to Grid States/Filter Sets (PivotGridFilterSetFeatures/PivotGridGriStateFeatures)
+- Allow users to switch grid layout of DxPivotGrid and show/hide column names (PivotGridSimpleConfigurations)
+- Cookie Helper
 
 ...and many more!
