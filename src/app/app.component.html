@@ -1,3 +1,43 @@
+<div>
+    <div style="display:inline-block;vertical-align: top;width:100%;">
+        <ExpandCollapsePanel>
+            <ng-container *ngIf="pivotGridHasLoaded">
+                <PivotGridConfigurationPanel [pivotGrid]="pivotGrid">
+                    <!-- <PivotGridStateFeatures gridStateFeatures [pivotGrid]="pivotGrid" positionOfIcons="bottom"
+                        [populateGridStateList]="getGridStatesBasedOnUserFromDb" [saveAsNewGridState]="saveNewGridStateToDb"
+                        [deleteGridState]="deleteGridStateFromDb" [setGridStateAsDefault]="saveGridStateAsDefaultToDb"
+                        [getDefaultGridStateBasedOnUser]="getDefaultGridStateBasedOnUserFromDb"
+                        [getGridStateById]="getGridStateBasedOnIdFromDb" labelMode="floating"></PivotGridStateFeatures>
+            
+                    <br />
+            
+                    <PivotGridFilterSetFeatures filterSetFeatures [pivotGrid]="pivotGrid" [filtersInUseStatus]="filtersInUseStatus"
+                        [queryString]="queryString" [populateFilterSetList]="getFilterSetsBasedOnUserFromDb"
+                        [queryStringToObject]="queryStringToObject" (queryObjectEvent)="onGetForecast($event)"
+                        [saveAsNewFilterSet]="saveNewFilterSetToDb" [deleteFilterSet]="deleteFilterSetFromDb"
+                        [getFilterSetById]="getFilterSetBasedOnIdFromDb" labelMode="floating"></PivotGridFilterSetFeatures> -->
+    
+                    <br /><br />
+    
+                    <PivotGridSimpleConfigurations simpleConfig [pivotGrid]="pivotGrid"
+                        [allowUsersToSwitchBetweenGridLayouts]="true" [allowUsersToShowHideColumns]="true">
+                    </PivotGridSimpleConfigurations>
+                </PivotGridConfigurationPanel>
+            </ng-container>
+        </ExpandCollapsePanel>
+    </div>
+</div>
+
+<div style="width:70%">
+    <PivotGrid pivotGridId="pivotGridId" [pivotGridDataSource]="pivotGridDataSource"
+     [allowCellNavigationUsingKeyboard]="true" (hasLoadedEvent)="pivotGridLoaded($event)"></PivotGrid>
+</div>
+
+
+<br /><br />
+
+
+
 <div style="width:90%; margin-left:5%">
     <Pagination [numberOfPages]="numberOfPages" [startPage]="startPage" [lastPage]="lastPage"
         [currentPage]="currentPage" [maxNumberOfPagesToShowOnEachRequest]="maxNumberOfPagesToShowOnEachRequest">
@@ -48,8 +88,5 @@
 <div style="width:90%; margin-left:5%">
     <div style="width:40%">
         <h3>Navigation Using Arrow Keys For Tables/Grids - Example is Applying the Feature to DxPivotGrid</h3>
-    </div>
-    <div style="width:70%">
-        <PivotGrid pivotGridId="pivotGridId" [pivotGridDataSource]="pivotGridDataSource"></PivotGrid>
     </div>
 </div>

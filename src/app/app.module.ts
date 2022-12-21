@@ -24,6 +24,7 @@ import { PivotGridFilterSetFeaturesComponent } from './components/shared/dev-ext
 import { PivotGridSimpleConfigurationsComponent } from './components/shared/dev-extreme/pivot-grid-simple-configurations/pivot-grid-simple-configurations.component';
 import { PivotGridConfigurationsPanelComponent } from './components/shared/dev-extreme/pivot-grid-configurations-panel/pivot-grid-configurations-panel.component';
 import { ExpandCollapsePanelComponent } from './components/shared/dev-extreme/expand-collapse-panel/expand-collapse-panel.component';
+import "devextreme/integration/jquery";
 
 @NgModule({
   declarations: [

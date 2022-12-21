@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 import { PivotGridDataSourceBuilder } from './components/shared/dev-extreme/builders/DxPivotGridDataSourceBuilder';
-import { PivotGridFieldBuilder } from './components/shared/dev-extreme/builders/DxPivotGridFieldBuilder';
+import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/pivot-grid.component';
 import { TextValuePair } from './components/TextValuePair';
 import { FromAndToDate } from './models/FromAndToDate';
 import { DateRangeRules } from './services/DateRange/Rules/DateRangeRules';
@@ -14,6 +14,9 @@ import { DateRangeRules } from './services/DateRange/Rules/DateRangeRules';
 })
 export class AppComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+  @ViewChild(PivotGridComponent, { static:false }) pivotGrid: PivotGridComponent;
+
+  pivotGridHasLoaded:boolean = false;
 
   numberOfPages: number = 21;
   startPage: number = 1;
@@ -109,6 +112,10 @@ export class AppComponent implements OnInit {
 
   onClear(event: boolean) {
     this.dataGrid.instance.clearFilter();
+  }
+
+  pivotGridLoaded(event:boolean){
+    this.pivotGridHasLoaded = event;
   }
 
   private getSales() {
