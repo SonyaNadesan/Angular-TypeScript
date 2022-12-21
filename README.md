@@ -17,5 +17,6 @@ This project was set up to explore Angular and develop reusable components/servi
 - Date Models, Helpers and Date Range Rule Factory
 - Global Search Feature for DxDataGrid
 - DxPivotGridBuilder & DxPivotGridFieldBuilder
+- Arrow Key Navigation for table structures including the DxPivotGrid
 
 ...and many more!
