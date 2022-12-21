@@ -1,0 +1,64 @@
+<div style="display:inline-block">
+    <DropDownList [items]="filterSetDropDownOptions" [label]="label" [labelMode]="labelMode" (onChangeEvent)="onLoadFilterSet($event)"
+        [selectedValue]="filtersInUseStatus == filtersInUseStatus_saved ? (selectedFilterSet ? selectedFilterSet.viewName : '') : ''">
+    </DropDownList>
+</div>
+
+<ng-container *ngIf="positionOfIcons == 'right'; then icons"></ng-container>
+<ng-container *ngIf="positionOfIcons == 'bottom'">
+    <br />
+    <div style="margin-left:10%">
+        <ng-container *ngIf="positionOfIcons == 'bottom'; then icons"></ng-container>
+    </div>
+</ng-container>
+
+<ng-template #icons>
+    <div style="display:inline-block;width:2%">
+        <dx-button icon="copy" [id]="copyLinkButtonId" (click)="copyLink()"
+            [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
+    </div>
+    <div style="display:inline-block;width:2%">
+        <dx-button icon="plus" (click)="toggleSaveNewFilterSetModalVisibility()"
+            [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
+    </div>
+    <div style="display:inline-block;width:2%">
+        <dx-button icon="trash" (click)="toggleDeleteFilterSetConfirmModalVisbility()"
+            [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
+    </div>
+</ng-template>
+
+<!--Save New Filter Set Modal-->
+<dx-popup [width]="500" [height]="250" [showTitle]="true" title="Save As New Filter Set" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [showCloseButton]="true" container=".dx-viewport"
+    [(visible)]="saveAsNewFilterSetModalVisibility">
+    <dxo-position at="middle" my="center">
+    </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+        <dx-text-box #newFilterSetName [showClearButton]="true"></dx-text-box><br />
+
+        <dx-button class="button-info" (click)="onSaveAsNewFilterSet(newFilterSetName.value)">Save</dx-button>
+    </div>
+</dx-popup>
+
+<!--Delete Filter Set Modal-->
+<dx-popup [width]="500" [height]="250" [showTitle]="true" title="Delete Filter Set" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [showCloseButton]="true" container=".dx-viewport"
+    [(visible)]="deleteFilterSetConfirmModalVisbility">
+    <dxo-position at="middle" my="center">
+    </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+        <p>Are you sure you want to delete <b>{{ selectedFilterSet.viewName }}</b>?</p>
+        <div>
+            <div style="display:inline-block">
+                <dx-button class="button-info" (click)="onDeleteFilterSet(selectedFilterSet.id)">Yes</dx-button>
+            </div>
+            <div style="display:inline-block">
+                <dx-button class="button-info" (click)="toggleDeleteFilterSetConfirmModalVisbility()">No</dx-button>
+            </div>
+        </div>
+    </div>
+</dx-popup>
+
+<dx-tooltip [target]="'#' + copyLinkButtonId" [(visible)]="copyLinkTooltipVisibility" position="top">
+    <div *dxTemplate="let data = data; of: 'content'"> Copied! </div>
+</dx-tooltip>

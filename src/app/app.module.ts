@@ -14,10 +14,16 @@ import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobut
 import { TableComponent } from './components/shared/table/table.component';
 import { DateBoxComponent } from './components/shared/dev-extreme/date-box/date-box.component';
 import { DateRangeBoxComponent } from './components/shared/dev-extreme/date-range-box/date-range-box.component';
-import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxPivotGridModule } from 'devextreme-angular';
+import { DxButtonModule, DxCheckBoxModule, DxDataGridModule, DxDateBoxModule, DxPivotGridModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
 import { GlobalSearchForDxDataGridComponent } from './components/shared/dev-extreme/global-search-for-dx-data-grid/global-search-for-dx-data-grid.component';
 import { DxoFieldPanelModule } from 'devextreme-angular/ui/nested';
 import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/pivot-grid.component';
+import { DropDownListComponent } from './components/shared/dev-extreme/drop-down-list/drop-down-list.component';
+import { PivotGridGridStateFeaturesComponent } from './components/shared/dev-extreme/pivot-grid-grid-state-features/pivot-grid-grid-state-features.component';
+import { PivotGridFilterSetFeaturesComponent } from './components/shared/dev-extreme/pivot-grid-filter-set-features/pivot-grid-filter-set-features.component';
+import { PivotGridSimpleConfigurationsComponent } from './components/shared/dev-extreme/pivot-grid-simple-configurations/pivot-grid-simple-configurations.component';
+import { PivotGridConfigurationsPanelComponent } from './components/shared/dev-extreme/pivot-grid-configurations-panel/pivot-grid-configurations-panel.component';
+import { ExpandCollapsePanelComponent } from './components/shared/dev-extreme/expand-collapse-panel/expand-collapse-panel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,13 @@ import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/p
     DateBoxComponent,
     DateRangeBoxComponent,
     GlobalSearchForDxDataGridComponent,
-    PivotGridComponent
+    PivotGridComponent,
+    DropDownListComponent,
+    PivotGridGridStateFeaturesComponent,
+    PivotGridFilterSetFeaturesComponent,
+    PivotGridSimpleConfigurationsComponent,
+    PivotGridConfigurationsPanelComponent,
+    ExpandCollapsePanelComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +55,12 @@ import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/p
     DxDataGridModule,
     DxPivotGridModule,
     DxButtonModule,
-    DxoFieldPanelModule
+    DxoFieldPanelModule,
+    DxSelectBoxModule,
+    DxTooltipModule,
+    DxPopupModule,
+    DxCheckBoxModule,
+    DxTextBoxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

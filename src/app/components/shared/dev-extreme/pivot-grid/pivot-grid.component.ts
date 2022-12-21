@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DxPivotGridComponent } from 'devextreme-angular';
-import { SaveStateEvent } from 'src/app/models/SaveStateEvent';
-import { SaveStateStatus } from 'src/app/models/SaveStateStatus';
-import { DocumentObjectModelHelper } from 'src/app/helpers/DocumentObjectModelHelper';
-import { SharableStatus } from 'src/app/models/SharableStatus';
-import { GridStateAndSharableStatus } from 'src/app/models/GridStateAndSharableStatus';
+import { SaveStateEvent } from '../../../../models/SaveStateEvent';
+import { SaveStateStatus } from '../../../../models/SaveStateStatus';
+import { DocumentObjectModelHelper } from '../../../../helpers/DocumentObjectModelHelper';
 import { KeyValuePair } from 'src/app/models/KeyValuePair';
-import 'devextreme/integration/jquery';
+import { GridStateAndSharableStatus } from '../../../../models/GridStateAndSharableStatus';
+import { SharableStatus } from '../../../../models/SharableStatus';
 
 @Component({
   selector: 'PivotGrid',
@@ -16,34 +15,35 @@ import 'devextreme/integration/jquery';
 export class PivotGridComponent implements OnInit {
   @ViewChild(DxPivotGridComponent, { static: false }) theGrid: DxPivotGridComponent;
 
-  @Input() pivotGridId: string = "pivotGrid";
-  @Input() allowSortingBySummary: boolean = true;
-  @Input() allowSorting: boolean = true;
-  @Input() allowFiltering: boolean = true;
-  @Input() allowExpandAll: boolean = true;
-  @Input() pivotGridHeight: number = 500;
-  @Input() showBorders: boolean = true;
-  @Input() pivotGridDataSource: any = [];
-  @Input() rowHeaderLayout: string = "standard";
+  @Input() pivotGridId: string;
+  @Input() allowSortingBySummary: boolean;
+  @Input() allowSorting: boolean;
+  @Input() allowFiltering: boolean;
+  @Input() allowExpandAll: boolean;
+  @Input() pivotGridHeight: number;
+  @Input() showBorders: boolean;
+  @Input() pivotGridDataSource: any;
+  @Input() rowHeaderLayout: string;
   @Input() exportEnabled: boolean = true;
-  @Input() fileName: string = "export";
+  @Input() fileName: string;
   @Input() fieldChooserAllowSearch: boolean = true;
   @Input() fieldChooserEnabled: boolean = true;
-  @Input() showDataFields: boolean = true;
-  @Input() showRowFields: boolean = true;
-  @Input() showColumnTotals: boolean = true;
-  @Input() showRowTotals: boolean = true;
-  @Input() showRowGrandTotals: boolean = true;
-  @Input() showColumnGrandTotals: boolean = true;
-  @Input() showColumnFields: boolean = true;
-  @Input() showFilterFields: boolean = true;
-  @Input() allowFieldDragging: boolean = true;
+  @Input() showDataFields: boolean;
+  @Input() showRowFields: boolean;
+  @Input() showColumnFields: boolean;
+  @Input() showFilterFields: boolean;
+  @Input() allowFieldDragging: boolean;
   @Input() fieldPanelVisible: boolean = true;
+  @Input() allowUsersToSwitchBetweenGridLayouts: boolean = true;
+  @Input() allowUsersToShowHideColumns: boolean;
+  @Input() allowCellNavigationUsingKeyboard: boolean;
+  @Input() showConfigurationPanel: boolean;
 
   @Output() onContextMenuPreparingEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCellPreparedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCellClickEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() gridStateChangeEvent: EventEmitter<GridStateAndSharableStatus> = new EventEmitter<GridStateAndSharableStatus>();
+  @Output() hasLoadedEvent: EventEmitter<boolean> = new EventEmitter();
 
   gridState: any;
 
@@ -52,21 +52,27 @@ export class PivotGridComponent implements OnInit {
   private selectedCell: any;
 
   saveStateLog: SaveStateEvent[] = [];
+  saveAsDefaultMessage: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    window.addEventListener("keydown", (event) => {
-      if (this.selectedCell) {
-        console.log(this.selectedCell);
+    if (this.allowCellNavigationUsingKeyboard) {
+      window.addEventListener("keydown", (event) => {
+        if (this.selectedCell) {
+          console.log(this.selectedCell);
 
-        let selectedCell = this.selectedCell[0];
+          let selectedCell = this.selectedCell[0];
 
-        let newSelectedCellId = DocumentObjectModelHelper.getSelectedCellOnTableKeyboardNavigation(event, selectedCell);
-        let e = this.cells.find(x => x.key == newSelectedCellId).value;
-        this.onCellClick(e);
-      }
-    }, true);
+          let newSelectedCellId = DocumentObjectModelHelper.getSelectedCellOnTableKeyboardNavigation(event, selectedCell);
+          let e = this.cells.find(x => x.key == newSelectedCellId).value;
+          this.onCellClick(e);
+        }
+      }, true);
+    }
+
+    this.hasLoadedEvent.emit(true);
   }
 
   onCellPrepared(e) {
@@ -82,16 +88,19 @@ export class PivotGridComponent implements OnInit {
   }
 
   onCellClick(e) {
-    if (this.selectedCell) {
-      let currentCell = this.cells.find(x => x.key == this.selectedCell[0].id).value;
-      currentCell.cellElement.removeClass("selectedCell");
+    if (this.allowCellNavigationUsingKeyboard) {
+      if (this.selectedCell) {
+        let currentCell = this.cells.find(x => x.key == this.selectedCell[0].id).value;
+        currentCell.cellElement.removeClass("selectedCell");
+      }
+
+      e.cellElement.addClass("selectedCell");
+
+      this.selectedCell = e.cellElement;
+
+      this.onCellClickEvent.emit(e);
     }
 
-    e.cellElement.addClass("selectedCell");
-
-    this.selectedCell = e.cellElement;
-
-    this.onCellClickEvent.emit(e);
   }
 
   onContextMenuPreparing(event) {
@@ -131,5 +140,10 @@ export class PivotGridComponent implements OnInit {
     gridStateAndSharableStatus.sharable = sharable ? SharableStatus.YES : SharableStatus.NO_CHANGE;
 
     this.gridStateChangeEvent.emit(gridStateAndSharableStatus);
+  }
+
+  setState(state: string){
+    let stateObj = JSON.parse(state);
+    this.theGrid.instance.getDataSource().state(stateObj);
   }
 }

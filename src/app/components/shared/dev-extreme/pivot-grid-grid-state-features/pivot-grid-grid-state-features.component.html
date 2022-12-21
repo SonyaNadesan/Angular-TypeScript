@@ -1,0 +1,67 @@
+<div style="display:inline-block">
+    <DropDownList [items]="gridStateDropDownOptions" [label]="label" [labelMode]="labelMode" (onChangeEvent)="onLoadGridState($event)"
+      [selectedValue]="selectedGridState ? selectedGridState.viewName : ''">
+    </DropDownList>
+  </div>
+  
+  <ng-container *ngIf="positionOfIcons == 'right'; then icons"></ng-container>
+  <ng-container *ngIf="positionOfIcons == 'bottom'">
+    <br />
+    <div style="margin-left:10%">
+      <ng-container *ngIf="positionOfIcons == 'bottom'; then icons"></ng-container>
+    </div>
+  </ng-container>
+  
+  <ng-template #icons>
+    <div style="display:inline-block;width:2%">
+      <dx-button [id]="copyLinkButtonId" icon="copy" (click)="copyLink()"></dx-button>
+    </div>
+    <div style="display:inline-block;width:2%">
+      <dx-button icon="plus" (click)="toggleSaveNewGridStateModalVisibility()"></dx-button>
+    </div>
+    <div style="display:inline-block;width:2%">
+      <dx-button icon="trash" (click)="toggleDeleteGridStateConfirmModalVisbility()"
+        [disabled]="selectedGridState.viewName == systemDefaultGridStateName"></dx-button>
+    </div>
+    <div style="display:inline-block;width:2%">
+      <dx-button [disabled]="selectedGridState.isDefault" icon="favorites"
+        (click)="onSetGridStateAsDefault(selectedGridState.id)"></dx-button>
+    </div>
+  </ng-template>
+  
+  <!--Save New Grid State Modal-->
+  <dx-popup [width]="500" [height]="250" [showTitle]="true" title="Save As New Grid State" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [showCloseButton]="true" container=".dx-viewport"
+    [(visible)]="saveAsNewGridStateModalVisibility">
+    <dxo-position at="middle" my="center">
+    </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box #newGridStateName [showClearButton]="true"></dx-text-box><br />
+  
+      <dx-button class="button-info" (click)="onSaveAsNewGridState(newGridStateName.value)">Save</dx-button>
+    </div>
+  </dx-popup>
+  
+  <!--Delete Grid State Modal-->
+  <dx-popup [width]="500" [height]="250" [showTitle]="true" title="Delete Grid State" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [showCloseButton]="true" container=".dx-viewport"
+    [(visible)]="deleteGridStateConfirmModalVisbility">
+    <dxo-position at="middle" my="center">
+    </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+      <p>Are you sure you want to delete <b>{{ selectedGridState.viewName }}</b>?</p>
+      <div>
+        <div style="display:inline-block">
+          <dx-button class="button-info" (click)="onDeleteGridState(selectedGridState.id)">Yes</dx-button>
+        </div>
+        <div style="display:inline-block">
+          <dx-button class="button-info" (click)="toggleDeleteGridStateConfirmModalVisbility()">No</dx-button>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+  
+  <dx-tooltip [target]="'#' + copyLinkButtonId" [(visible)]="copyLinkTooltipVisibility" position="top">
+    <div *dxTemplate="let data = data; of: 'content'"> Copied! </div>
+  </dx-tooltip>
+  

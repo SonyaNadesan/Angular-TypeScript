@@ -1,16 +1,19 @@
-<dx-pivot-grid
-    [id]="pivotGridId"
-    [allowSortingBySummary]="allowSortingBySummary"
-    [allowFiltering]="allowFiltering"
-    [showBorders]="showBorders"
-    [showColumnGrandTotals]="showColumnGrandTotals"
-    [showRowGrandTotals]="showRowGrandTotals"
-    [showRowTotals]="showRowTotals"
-    [showColumnTotals]="showColumnTotals"
-    [dataSource]="pivotGridDataSource"
-    (onCellClick)="onCellClick($event)" 
-    (onCellPrepared)="onCellPrepared($event)"
-  >
-    <dxo-field-chooser [enabled]="true" [height]="400"></dxo-field-chooser>
-    <dxo-scrolling mode="virtual"></dxo-scrolling>
-  </dx-pivot-grid>
+<dx-pivot-grid [id]="pivotGridId" style="margin: 20px 20px 0 20px; width: 98vw;"
+  [allowSortingBySummary]="allowSortingBySummary" [allowSorting]="allowSorting" [allowFiltering]="allowFiltering"
+  [allowExpandAll]="allowExpandAll" [height]="pivotGridHeight" [showBorders]="true" [dataSource]="pivotGridDataSource"
+  [rowHeaderLayout]="rowHeaderLayout" (onCellPrepared)="onCellPrepared($event)"
+  (onContextMenuPreparing)="onContextMenuPreparing($event)" (onCellClick)="onCellClick($event)">
+
+  <dxo-export [enabled]="exportEnabled" [fileName]="fileName"></dxo-export>
+  <dxo-field-chooser [allowSearch]="fieldChooserAllowSearch" [enabled]="fieldChooserEnabled"></dxo-field-chooser>
+
+  <dxo-field-panel [showDataFields]="showDataFields" [showRowFields]="showRowFields"
+    [showColumnFields]="showColumnFields" [showFilterFields]="showFilterFields"
+    [allowFieldDragging]="allowFieldDragging" [visible]="fieldPanelVisible">
+  </dxo-field-panel>
+
+  <dxo-state-storing [enabled]="true" type="custom" [customSave]="saveState">
+  </dxo-state-storing>
+
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+</dx-pivot-grid>

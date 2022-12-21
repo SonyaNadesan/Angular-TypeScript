@@ -1,0 +1,21 @@
+<ng-container *ngIf="labelMode != 'floating'">
+    <div class="dx-fieldset">
+        <div class="dx-field">
+            <div class="dx-field-label">{{label}}</div>
+            <div class="dx-field-value">
+                <dx-select-box [disabled]="isDisabled" [dataSource]="items"
+                    displayExpr="value" valueExpr="value" [searchMode]="searchModeOption" [searchExpr]="searchExprOption"
+                    [searchTimeout]="searchTimeoutOption" [value]="selectedValue" [minSearchLength]="minSearchLengthOption"
+                    [searchEnabled]="true" (onValueChanged)="onChange($event)">
+                </dx-select-box>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="labelMode == 'floating'">
+    <dx-select-box [labelMode]="labelMode" [label]="label" [disabled]="isDisabled" [dataSource]="items"
+        displayExpr="value" valueExpr="value" [searchMode]="searchModeOption" [searchExpr]="searchExprOption"
+        [searchTimeout]="searchTimeoutOption" [value]="selectedValue" [minSearchLength]="minSearchLengthOption"
+        [searchEnabled]="true" (onValueChanged)="onChange($event)">
+    </dx-select-box>
+</ng-container>

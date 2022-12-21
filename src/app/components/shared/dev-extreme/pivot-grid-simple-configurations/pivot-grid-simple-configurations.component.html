@@ -1,0 +1,21 @@
+<div style="display:inline-block; margin-left:5%">
+  <ng-container *ngIf="allowUsersToSwitchBetweenGridLayouts">
+    <dx-check-box style="width:10%" [value]="useTreeLayout" text="Tree" (onValueChanged)="useTreeLayoutChange($event)">
+    </dx-check-box>
+  </ng-container>
+</div>
+<div style="display:inline-block; margin-left:5%">
+  <ng-container *ngIf="allowUsersToShowHideColumns">
+    <dx-check-box style="width:10%" [value]="fieldPanelVisible" text="Columns"
+      (onValueChanged)="onShowColumnsChange($event)"></dx-check-box>
+  </ng-container>
+</div>
+<div style="display:inline-block; margin-left:5%">
+  <ng-container *ngIf="allowUsersToShowHideColumns || allowUsersToSwitchBetweenGridLayouts">
+    <dx-button style="width:50%" icon="save" class="button-info" (click)="saveAsDefaultGridConfig()">
+    </dx-button>
+  </ng-container>
+</div>
+<div style="display:inline-block; margin-left:5%">
+  <span style="width:50%">{{saveLayoutAndColumnsConfigMessage}}</span>
+</div>
