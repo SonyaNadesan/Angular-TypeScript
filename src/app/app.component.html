@@ -3,8 +3,8 @@
         <ExpandCollapsePanel>
             <h1>ExpandCollapsePanel with PivotGridConfigurationFeatures</h1>
             <ng-container *ngIf="pivotGridHasLoaded">
-                <PivotGridConfigurationPanel [pivotGrid]="pivotGrid">
-                    <!-- <PivotGridStateFeatures gridStateFeatures [pivotGrid]="pivotGrid" positionOfIcons="bottom"
+                <GridConfigurationPanel [grid]="pivotGrid">
+                    <!-- <GridStateFeatures gridStateFeatures [grid]="pivotGrid" positionOfIcons="bottom"
                         [populateGridStateList]="getGridStatesBasedOnUserFromDb" [saveAsNewGridState]="saveNewGridStateToDb"
                         [deleteGridState]="deleteGridStateFromDb" [setGridStateAsDefault]="saveGridStateAsDefaultToDb"
                         [getDefaultGridStateBasedOnUser]="getDefaultGridStateBasedOnUserFromDb"
@@ -12,7 +12,7 @@
             
                     <br />
             
-                    <PivotGridFilterSetFeatures filterSetFeatures [pivotGrid]="pivotGrid" [filtersInUseStatus]="filtersInUseStatus"
+                    <GridFilterSetFeatures filterSetFeatures [grid]="pivotGrid" [filtersInUseStatus]="filtersInUseStatus"
                         [queryString]="queryString" [populateFilterSetList]="getFilterSetsBasedOnUserFromDb"
                         [queryStringToObject]="queryStringToObject" (queryObjectEvent)="onGetForecast($event)"
                         [saveAsNewFilterSet]="saveNewFilterSetToDb" [deleteFilterSet]="deleteFilterSetFromDb"
@@ -23,14 +23,14 @@
                             [allowUsersToSwitchBetweenGridLayouts]="true" [allowUsersToShowHideColumns]="true">
                         </PivotGridSimpleConfigurations>
                     </div>
-                </PivotGridConfigurationPanel>
+                </GridConfigurationPanel>
             </ng-container>
         </ExpandCollapsePanel>
     </div>
 </div>
 
 <div style="width:70%">
-    <PivotGrid pivotGridId="examplePivotGrid" [allowSortingBySummary]="true" [allowSorting]="true" [allowFiltering]="true"
+    <PivotGrid gridId="examplePivotGrid" [allowSortingBySummary]="true" [allowSorting]="true" [allowFiltering]="true"
         [allowExpandAll]="true" [showBorders]="true"
         [pivotGridDataSource]="pivotGridDataSource" [rowHeaderLayout]="gridLayout"
         [exportEnabled]="true" fileName="Sales" [fieldChooserEnabled]="true"

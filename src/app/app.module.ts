@@ -19,10 +19,10 @@ import { GlobalSearchForDxDataGridComponent } from './components/shared/dev-extr
 import { DxoFieldPanelModule } from 'devextreme-angular/ui/nested';
 import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/pivot-grid.component';
 import { DropDownListComponent } from './components/shared/dev-extreme/drop-down-list/drop-down-list.component';
-import { PivotGridGridStateFeaturesComponent } from './components/shared/dev-extreme/pivot-grid-grid-state-features/pivot-grid-grid-state-features.component';
-import { PivotGridFilterSetFeaturesComponent } from './components/shared/dev-extreme/pivot-grid-filter-set-features/pivot-grid-filter-set-features.component';
+import { GridGridStateFeaturesComponent } from './components/shared/dev-extreme/grid-grid-state-features/grid-grid-state-features.component';
+import { GridFilterSetFeaturesComponent } from './components/shared/dev-extreme/grid-filter-set-features/grid-filter-set-features.component';
 import { PivotGridSimpleConfigurationsComponent } from './components/shared/dev-extreme/pivot-grid-simple-configurations/pivot-grid-simple-configurations.component';
-import { PivotGridConfigurationsPanelComponent } from './components/shared/dev-extreme/pivot-grid-configurations-panel/pivot-grid-configurations-panel.component';
+import { GridConfigurationsPanelComponent } from './components/shared/dev-extreme/grid-configurations-panel/grid-configurations-panel.component';
 import { ExpandCollapsePanelComponent } from './components/shared/dev-extreme/expand-collapse-panel/expand-collapse-panel.component';
 import "devextreme/integration/jquery";
 
@@ -44,10 +44,10 @@ import "devextreme/integration/jquery";
     GlobalSearchForDxDataGridComponent,
     PivotGridComponent,
     DropDownListComponent,
-    PivotGridGridStateFeaturesComponent,
-    PivotGridFilterSetFeaturesComponent,
+    GridGridStateFeaturesComponent,
+    GridFilterSetFeaturesComponent,
     PivotGridSimpleConfigurationsComponent,
-    PivotGridConfigurationsPanelComponent,
+    GridConfigurationsPanelComponent,
     ExpandCollapsePanelComponent
   ],
   imports: [

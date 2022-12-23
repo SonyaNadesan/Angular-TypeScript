@@ -6,14 +6,14 @@ import { CreateUserDefinedView } from 'src/app/models/CreateUserDefinedView';
 import { UserDefinedView } from 'src/app/models/UserDefinedView';
 import { KeyValuePair } from 'src/app/models/KeyValuePair';
 import { ServiceResponse } from 'src/app/models/ServiceResponse';
-import { PivotGridComponent } from '../pivot-grid/pivot-grid.component';
+import { IGrid } from 'src/app/models/IGrid';
 
 @Component({
-  selector: 'PivotGridStateFeatures',
-  templateUrl: './pivot-grid-grid-state-features.component.html',
-  styleUrls: ['./pivot-grid-grid-state-features.component.css']
+  selector: 'GridGridStateFeatures',
+  templateUrl: './grid-grid-state-features.component.html',
+  styleUrls: ['./grid-grid-state-features.component.css']
 })
-export class PivotGridGridStateFeaturesComponent implements OnInit {
+export class GridGridStateFeaturesComponent implements OnInit {
 
   @Input() labelMode: string = "static";
   label = "Grid State";
@@ -27,7 +27,7 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
 
   copyLinkButtonId: string;
 
-  @Input() pivotGrid: PivotGridComponent;
+  @Input() grid: IGrid;
   @Input() populateGridStateList: () => Observable<ServiceResponse<UserDefinedView[]>>;
   @Input() saveAsNewGridState: (gridStateName: string, gridState: any) => Observable<ServiceResponse<boolean>>;
   @Input() deleteGridState: (gridStateId: number) => Observable<ServiceResponse<boolean>>;
@@ -51,7 +51,7 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
       });
     });
 
-    this.copyLinkButtonId = this.pivotGrid.pivotGridId + '_gridState_btnCopy';
+    this.copyLinkButtonId = this.grid.gridId + '_gridState_btnCopy';
   }
 
   onLoadGridState(event: KeyValuePair<number, string>){
@@ -66,11 +66,11 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
       alert("There is already a grid state called " + gridStateName + ". Please provide a different name.");
     } else {
       let newGridState = new CreateUserDefinedView();
-      newGridState.gridState = this.pivotGrid.gridState;
+      newGridState.gridState = this.grid.gridState;
       newGridState.viewName = gridStateName;
       newGridState.queryParameters = "";
 
-      this.saveAsNewGridState(gridStateName, this.pivotGrid.gridState).subscribe(x => {
+      this.saveAsNewGridState(gridStateName, this.grid.gridState).subscribe(x => {
         if (x.result) {
           this.populateGridStateList().subscribe(x =>{
             this.gridStateDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
@@ -95,7 +95,7 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
           this.getDefaultGridStateBasedOnUser().subscribe(x => {
             if(x.isValid){
               if(x.result){
-                this.pivotGrid.setState(x.result.gridState);
+                this.grid.setState(x.result.gridState);
                 this.selectedGridState = x.result;
               }
             }
@@ -151,7 +151,7 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
     this.getGridStateById(gridState).subscribe(x =>{
       if(x.isValid){
         if(x.result){
-          this.pivotGrid.setState(x.result.gridState);
+          this.grid.setState(x.result.gridState);
           this.selectedGridState = x.result;
         }
       }

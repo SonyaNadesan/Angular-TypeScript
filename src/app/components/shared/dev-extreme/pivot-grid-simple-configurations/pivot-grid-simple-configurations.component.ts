@@ -36,10 +36,10 @@ export class PivotGridSimpleConfigurationsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    let defaultUseTreeLayout = CookieHelper.getCookie(`${this.pivotGrid.pivotGridId}-useTreeLayout`, "true");
+    let defaultUseTreeLayout = CookieHelper.getCookie(`${this.pivotGrid.gridId}-useTreeLayout`, "true");
     this.useTreeLayout = defaultUseTreeLayout.toLowerCase() == "true";
 
-    let defaultShowColumns = CookieHelper.getCookie(`${this.pivotGrid.pivotGridId}-defaultShowColumns`, "true");
+    let defaultShowColumns = CookieHelper.getCookie(`${this.pivotGrid.gridId}-defaultShowColumns`, "true");
     this.fieldPanelVisible = defaultShowColumns.toLocaleLowerCase() == "true";
 
     this.pivotGrid.rowHeaderLayout = this.useTreeLayout ? "tree" : "standard";
@@ -64,8 +64,8 @@ export class PivotGridSimpleConfigurationsComponent implements OnInit {
   }
 
   saveAsDefaultGridConfig() {
-    CookieHelper.setCookie(`${this.pivotGrid.pivotGridId}-useTreeLayout`, this.useTreeLayout);
-    CookieHelper.setCookie(`${this.pivotGrid.pivotGridId}-defaultShowColumns`, this.fieldPanelVisible);
+    CookieHelper.setCookie(`${this.pivotGrid.gridId}-useTreeLayout`, this.useTreeLayout);
+    CookieHelper.setCookie(`${this.pivotGrid.gridId}-defaultShowColumns`, this.fieldPanelVisible);
     this.saveLayoutAndColumnsConfigMessage = "Saved!";
   }
 

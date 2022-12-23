@@ -8,18 +8,19 @@ import { ServiceResponse } from 'src/app/models/ServiceResponse';
 import { PivotGridComponent } from '../pivot-grid/pivot-grid.component';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { IGrid } from 'src/app/models/IGrid';
 
 @Component({
-  selector: 'PivotGridFilterSetFeatures',
-  templateUrl: './pivot-grid-filter-set-features.component.html',
-  styleUrls: ['./pivot-grid-filter-set-features.component.css']
+  selector: 'GridFilterSetFeatures',
+  templateUrl: './grid-filter-set-features.component.html',
+  styleUrls: ['./grid-filter-set-features.component.css']
 })
-export class PivotGridFilterSetFeaturesComponent implements OnInit {
+export class GridFilterSetFeaturesComponent implements OnInit {
 
   @Input() labelMode: string = "static";
   label = "Filter Set";
 
-  @Input() pivotGrid: PivotGridComponent;
+  @Input() grid: IGrid;
   @Input() queryString: string;
   @Input() filtersInUseStatus: FiltersInUseStatus = FiltersInUseStatus.NONE;
   filtersInUseStatus_saved: FiltersInUseStatus = FiltersInUseStatus.SAVED;
@@ -58,7 +59,7 @@ export class PivotGridFilterSetFeaturesComponent implements OnInit {
       this.filterSetDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
     });
 
-    this.copyLinkButtonId = this.pivotGrid.pivotGridId + '_filterSet_btnCopy';
+    this.copyLinkButtonId = this.grid.gridId + '_filterSet_btnCopy';
   }
 
   onLoadFilterSet(event: KeyValuePair<number, string>) {

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PivotGridConfigurationsPanelComponent } from './pivot-grid-configurations-panel.component';
+import { GridConfigurationsPanelComponent } from './grid-configurations-panel.component';
 
 describe('PivotGridConfigurationsPanelComponent', () => {
-  let component: PivotGridConfigurationsPanelComponent;
-  let fixture: ComponentFixture<PivotGridConfigurationsPanelComponent>;
+  let component: GridConfigurationsPanelComponent;
+  let fixture: ComponentFixture<GridConfigurationsPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PivotGridConfigurationsPanelComponent ]
+      declarations: [ GridConfigurationsPanelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PivotGridConfigurationsPanelComponent);
+    fixture = TestBed.createComponent(GridConfigurationsPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,16 +6,17 @@ import { DocumentObjectModelHelper } from '../../../../helpers/DocumentObjectMod
 import { KeyValuePair } from 'src/app/models/KeyValuePair';
 import { GridStateAndSharableStatus } from '../../../../models/GridStateAndSharableStatus';
 import { SharableStatus } from '../../../../models/SharableStatus';
+import { IGrid } from 'src/app/models/IGrid';
 
 @Component({
   selector: 'PivotGrid',
   templateUrl: './pivot-grid.component.html',
   styleUrls: ['./pivot-grid.component.css']
 })
-export class PivotGridComponent implements OnInit {
+export class PivotGridComponent implements OnInit, IGrid {
   @ViewChild(DxPivotGridComponent, { static: false }) theGrid: DxPivotGridComponent;
 
-  @Input() pivotGridId: string;
+  @Input() gridId: string;
   @Input() allowSortingBySummary: boolean;
   @Input() allowSorting: boolean;
   @Input() allowFiltering: boolean;
@@ -42,7 +43,7 @@ export class PivotGridComponent implements OnInit {
   @Output() gridStateChangeEvent: EventEmitter<GridStateAndSharableStatus> = new EventEmitter<GridStateAndSharableStatus>();
   @Output() hasLoadedEvent: EventEmitter<boolean> = new EventEmitter();
 
-  gridState: any;
+  gridState: string;
 
   private cellCount: number = 0;
   private cells: KeyValuePair<string, any>[] = [];
@@ -72,30 +73,30 @@ export class PivotGridComponent implements OnInit {
     this.hasLoadedEvent.emit(true);
   }
 
-  onCellPrepared(e) {
+  onCellPrepared(event) {
     this.cellCount = this.cellCount + 1;
 
-    e.cellElement[0].id = this.cellCount.toString();
+    event.cellElement[0].id = this.cellCount.toString();
 
-    this.cells.push(new KeyValuePair<string, any>(e.cellElement[0].id, e));
+    this.cells.push(new KeyValuePair<string, any>(event.cellElement[0].id, event));
 
-    let idAndValue = new KeyValuePair<string, number>(e.cellElement[0].id, e.cell.value);
+    let idAndValue = new KeyValuePair<string, number>(event.cellElement[0].id, event.cell.value);
 
     this.onCellPreparedEvent.emit(idAndValue);
   }
 
-  onCellClick(e) {
+  onCellClick(event) {
     if (this.allowCellNavigationUsingKeyboard) {
       if (this.selectedCell) {
         let currentCell = this.cells.find(x => x.key == this.selectedCell[0].id).value;
         currentCell.cellElement.removeClass("selectedCell");
       }
 
-      e.cellElement.addClass("selectedCell");
+      event.cellElement.addClass("selectedCell");
 
-      this.selectedCell = e.cellElement;
+      this.selectedCell = event.cellElement;
 
-      this.onCellClickEvent.emit(e);
+      this.onCellClickEvent.emit(event);
     }
 
   }
