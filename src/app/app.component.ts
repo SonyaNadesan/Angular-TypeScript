@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   @ViewChild(PivotGridComponent, { static:false }) pivotGrid: PivotGridComponent;
 
   pivotGridHasLoaded:boolean = false;
+  gridLayout: string = "standard";
+  showColumns: boolean = true;
 
   numberOfPages: number = 21;
   startPage: number = 1;

@@ -1,6 +1,7 @@
 <div>
     <div style="display:inline-block;vertical-align: top;width:100%;">
         <ExpandCollapsePanel>
+            <h1>ExpandCollapsePanel with PivotGridConfigurationFeatures</h1>
             <ng-container *ngIf="pivotGridHasLoaded">
                 <PivotGridConfigurationPanel [pivotGrid]="pivotGrid">
                     <!-- <PivotGridStateFeatures gridStateFeatures [pivotGrid]="pivotGrid" positionOfIcons="bottom"
@@ -16,12 +17,12 @@
                         [queryStringToObject]="queryStringToObject" (queryObjectEvent)="onGetForecast($event)"
                         [saveAsNewFilterSet]="saveNewFilterSetToDb" [deleteFilterSet]="deleteFilterSetFromDb"
                         [getFilterSetById]="getFilterSetBasedOnIdFromDb" labelMode="floating"></PivotGridFilterSetFeatures> -->
-    
-                    <br /><br />
-    
-                    <PivotGridSimpleConfigurations simpleConfig [pivotGrid]="pivotGrid"
-                        [allowUsersToSwitchBetweenGridLayouts]="true" [allowUsersToShowHideColumns]="true">
-                    </PivotGridSimpleConfigurations>
+
+                    <div style="width:100%">
+                        <PivotGridSimpleConfigurations simpleConfig [pivotGrid]="pivotGrid"
+                            [allowUsersToSwitchBetweenGridLayouts]="true" [allowUsersToShowHideColumns]="true">
+                        </PivotGridSimpleConfigurations>
+                    </div>
                 </PivotGridConfigurationPanel>
             </ng-container>
         </ExpandCollapsePanel>
@@ -29,8 +30,14 @@
 </div>
 
 <div style="width:70%">
-    <PivotGrid pivotGridId="pivotGridId" [pivotGridDataSource]="pivotGridDataSource"
-     [allowCellNavigationUsingKeyboard]="true" (hasLoadedEvent)="pivotGridLoaded($event)"></PivotGrid>
+    <PivotGrid pivotGridId="examplePivotGrid" [allowSortingBySummary]="true" [allowSorting]="true" [allowFiltering]="true"
+        [allowExpandAll]="true" [showBorders]="true"
+        [pivotGridDataSource]="pivotGridDataSource" [rowHeaderLayout]="gridLayout"
+        [exportEnabled]="true" fileName="Sales" [fieldChooserEnabled]="true"
+        [showDataFields]="true" [showRowFields]="true" [showColumnFields]="true" [showFilterFields]="true"
+        [allowFieldDragging]="true" [fieldPanelVisible]="showColumns"
+        [allowCellNavigationUsingKeyboard]="true" (hasLoadedEvent)="pivotGridLoaded($event)">
+    </PivotGrid>
 </div>
 
 
