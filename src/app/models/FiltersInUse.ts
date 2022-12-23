@@ -1,6 +1,5 @@
-import { UserDefinedView } from "./UserDefinedView";
-
-export class FilterInUse{
-  status: FiltersInUseStatus;
-  filterSet: UserDefinedView;
+export enum FiltersInUseStatus{
+  UNSAVED,
+  SAVED,
+  NONE
 }

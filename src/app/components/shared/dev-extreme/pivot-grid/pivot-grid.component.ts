@@ -34,10 +34,7 @@ export class PivotGridComponent implements OnInit {
   @Input() showFilterFields: boolean;
   @Input() allowFieldDragging: boolean;
   @Input() fieldPanelVisible: boolean = true;
-  @Input() allowUsersToSwitchBetweenGridLayouts: boolean = true;
-  @Input() allowUsersToShowHideColumns: boolean;
   @Input() allowCellNavigationUsingKeyboard: boolean;
-  @Input() showConfigurationPanel: boolean;
 
   @Output() onContextMenuPreparingEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCellPreparedEvent: EventEmitter<any> = new EventEmitter<any>();

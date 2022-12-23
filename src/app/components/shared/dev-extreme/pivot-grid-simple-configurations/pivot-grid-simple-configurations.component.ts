@@ -59,7 +59,6 @@ export class PivotGridSimpleConfigurationsComponent implements OnInit {
   onShowColumnsChange(event) {
     this.fieldPanelVisible = event.value;
     this.saveLayoutAndColumnsConfigMessage = "";
-    alert(this.fieldPanelVisible);
     this.pivotGrid.fieldPanelVisible = this.fieldPanelVisible;
     this.showColumnsEvent.emit(this.fieldPanelVisible);
   }

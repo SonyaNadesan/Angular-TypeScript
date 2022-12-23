@@ -68,8 +68,8 @@ export class PivotGridFilterSetFeaturesComponent implements OnInit {
           this.queryString = x.result.queryParameter;
           let obj = this.queryStringToObject(this.queryString);
           this.selectedFilterSet = x.result;
-          this.filtersInUseStatus = FiltersInUseStatus.SAVED;
           this.queryObjectEvent.emit(obj);
+          this.filtersInUseStatus = FiltersInUseStatus.SAVED;
         }
       }
     });
@@ -90,9 +90,13 @@ export class PivotGridFilterSetFeaturesComponent implements OnInit {
       this.saveAsNewFilterSet(filterSetName, this.queryString).subscribe(x => {
         if (x.result) {
           this.populateFilterSetList().subscribe(x => {
-            this.selectedFilterSet = x.result.find(x => x.includesFilterSet && x.viewName == filterSetName);
             this.filterSetDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
+            this.selectedFilterSet = x.result.find(x => x.includesFilterSet && x.viewName == filterSetName);
           });
+
+          this.saveAsNewFilterSetModalVisibility = false;
+        }else{
+          alert("Sorry, something went wrong.z\n" + x.errorMessage);
         }
       });
     }
@@ -108,8 +112,8 @@ export class PivotGridFilterSetFeaturesComponent implements OnInit {
         if (x.isValid) {
           this.filterSetDropDownOptions = this.filterSetDropDownOptions.filter(x => x.key != filterSetId);
           this.selectedFilterSet = null;
-          this.filtersInUseStatus = FiltersInUseStatus.UNSAVED;
-          this.toggleDeleteFilterSetConfirmModalVisbility();
+          this.filtersInUseStatus = FiltersInUseStatus.NONE;
+          this.deleteFilterSetConfirmModalVisbility = false;
         } else {
           alert("Sorry, something went wrong.z\n" + x.errorMessage);
         }

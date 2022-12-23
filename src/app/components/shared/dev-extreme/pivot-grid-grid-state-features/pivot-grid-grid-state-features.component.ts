@@ -73,9 +73,11 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
       this.saveAsNewGridState(gridStateName, this.pivotGrid.gridState).subscribe(x => {
         if (x.result) {
           this.populateGridStateList().subscribe(x =>{
-            this.selectedGridState = x.result.find(x => x.includesGridState && x.viewName == gridStateName);
             this.gridStateDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
+            this.selectedGridState = x.result.find(x => x.includesGridState && x.viewName == gridStateName);
           });
+
+          this.saveAsNewGridStateModalVisibility = false;
         }
       });
     }
@@ -98,7 +100,7 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
               }
             }
 
-            this.toggleDeleteGridStateConfirmModalVisbility();
+            this.deleteGridStateConfirmModalVisbility = false;
           });
         }
       });
@@ -108,7 +110,6 @@ export class PivotGridGridStateFeaturesComponent implements OnInit {
   onSetGridStateAsDefault(gridStateId: number){
     this.setGridStateAsDefault(gridStateId).subscribe(x => {
       if(x.result){
-        let selection = this.gridStateDropDownOptions.find(x => x.key == gridStateId);
         this.getGridStateById(gridStateId).subscribe(x => {
           if(x.isValid){
             this.selectedGridState = x.result;

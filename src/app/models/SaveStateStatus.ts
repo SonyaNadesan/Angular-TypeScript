@@ -2,4 +2,4 @@ export enum SaveStateStatus{
     INCOMPLETE_STATE_CHANGED_VIA_VIEW_ID,
     INCOMPLETE_UNCHANGED,
     COMPLETE
-}
+  }

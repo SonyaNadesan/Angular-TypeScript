@@ -11,17 +11,16 @@
         <ng-container *ngIf="positionOfIcons == 'bottom'; then icons"></ng-container>
     </div>
 </ng-container>
-
 <ng-template #icons>
-    <div style="display:inline-block;width:2%">
+    <div style="display:inline-block;width:2%;margin-left:1%">
         <dx-button icon="copy" [id]="copyLinkButtonId" (click)="copyLink()"
             [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
     </div>
-    <div style="display:inline-block;width:2%">
+    <div style="display:inline-block;width:2%;margin-left:1%">
         <dx-button icon="plus" (click)="toggleSaveNewFilterSetModalVisibility()"
-            [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
+            [disabled]="filtersInUseStatus != filtersInUseStatus_unsaved"></dx-button>
     </div>
-    <div style="display:inline-block;width:2%">
+    <div style="display:inline-block;width:2%;margin-left:1%">
         <dx-button icon="trash" (click)="toggleDeleteFilterSetConfirmModalVisbility()"
             [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
     </div>
