@@ -25,6 +25,7 @@ import { PivotGridSimpleConfigurationsComponent } from './components/shared/dev-
 import { GridConfigurationsPanelComponent } from './components/shared/dev-extreme/grid-configurations-panel/grid-configurations-panel.component';
 import { ExpandCollapsePanelComponent } from './components/shared/dev-extreme/expand-collapse-panel/expand-collapse-panel.component';
 import "devextreme/integration/jquery";
+import { DataGridComponent } from './components/shared/dev-extreme/data-grid/data-grid.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import "devextreme/integration/jquery";
     GridFilterSetFeaturesComponent,
     PivotGridSimpleConfigurationsComponent,
     GridConfigurationsPanelComponent,
-    ExpandCollapsePanelComponent
+    ExpandCollapsePanelComponent,
+    DataGridComponent
   ],
   imports: [
     BrowserModule,
