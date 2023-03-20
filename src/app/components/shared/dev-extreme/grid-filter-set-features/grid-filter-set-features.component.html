@@ -13,15 +13,15 @@
 </ng-container>
 <ng-template #icons>
     <div style="display:inline-block;width:2%;margin-left:1%">
-        <dx-button icon="copy" [id]="copyLinkButtonId" (click)="copyLink()"
+        <dx-button icon="copy" [id]="copyLinkButtonId" (click)="copyLink()" hint="Copy Link"
             [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
     </div>
     <div style="display:inline-block;width:2%;margin-left:1%">
-        <dx-button icon="plus" (click)="toggleSaveNewFilterSetModalVisibility()"
+        <dx-button icon="plus" (click)="toggleSaveNewFilterSetModalVisibility()" hint="Save As..."
             [disabled]="filtersInUseStatus != filtersInUseStatus_unsaved"></dx-button>
     </div>
     <div style="display:inline-block;width:2%;margin-left:1%">
-        <dx-button icon="trash" (click)="toggleDeleteFilterSetConfirmModalVisbility()"
+        <dx-button icon="trash" (click)="toggleDeleteFilterSetConfirmModalVisbility()" hint="Delete"
             [disabled]="filtersInUseStatus != filtersInUseStatus_saved"></dx-button>
     </div>
 </ng-template>

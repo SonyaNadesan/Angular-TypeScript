@@ -14,17 +14,17 @@
 
 <ng-template #icons>
   <div style="display:inline-block;width:2%;margin-left:1%">
-    <dx-button [id]="copyLinkButtonId" icon="copy" (click)="copyLink()"></dx-button>
+    <dx-button [id]="copyLinkButtonId" icon="copy" (click)="copyLink()" hint="Copy Link" [visible]="showCopyIcon"></dx-button>
   </div>
   <div style="display:inline-block;width:2%;margin-left:1%">
-    <dx-button icon="plus" (click)="toggleSaveNewGridStateModalVisibility()"></dx-button>
+    <dx-button icon="plus" (click)="toggleSaveNewGridStateModalVisibility()" hint="Save As..."></dx-button>
   </div>
   <div style="display:inline-block;width:2%;margin-left:1%">
-    <dx-button icon="trash" (click)="toggleDeleteGridStateConfirmModalVisbility()"
-      [disabled]="selectedGridState.viewName == systemDefaultGridStateName"></dx-button>
+    <dx-button icon="trash" (click)="toggleDeleteGridStateConfirmModalVisbility()" hint="Delete"
+      [disabled]="selectedGridState && selectedGridState.viewName == systemDefaultGridStateName"></dx-button>
   </div>
   <div style="display:inline-block;width:2%;margin-left:1%">
-    <dx-button [disabled]="selectedGridState.isDefault == true" icon="favorites"
+    <dx-button [disabled]="!selectedGridState || selectedGridState.isDefault == true" icon="favorites" hint="Set as Default"
       (click)="onSetGridStateAsDefault(selectedGridState.id)"></dx-button>
   </div>
 </ng-template>

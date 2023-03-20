@@ -21,7 +21,7 @@ export class GridGridStateFeaturesComponent implements OnInit {
   gridStateDropDownOptions: KeyValuePair<number, string>[] = [];
   selectedGridState: UserDefinedView;
 
-  saveAsNewGridStateModalVisibility:boolean = false;
+  saveAsNewGridStateModalVisibility: boolean = false;
   deleteGridStateConfirmModalVisbility: boolean = false;
   copyLinkTooltipVisibility: boolean = false;
 
@@ -34,6 +34,8 @@ export class GridGridStateFeaturesComponent implements OnInit {
   @Input() setGridStateAsDefault: (gridStateId: number) => Observable<ServiceResponse<boolean>>;
   @Input() getGridStateById: (gridStateId: number) => Observable<ServiceResponse<UserDefinedView>>;
   @Input() getDefaultGridStateBasedOnUser: () => Observable<ServiceResponse<UserDefinedView>>;
+  @Input() getGridStateIdFromUrl: () => number;
+  @Input() showCopyIcon: boolean = true;
 
   @Input() positionOfIcons: string = "right";
 
@@ -44,17 +46,32 @@ export class GridGridStateFeaturesComponent implements OnInit {
   ngOnInit() {
     this.populateGridStateList().subscribe(x => {
       this.gridStateDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
-      this.getDefaultGridStateBasedOnUser().subscribe(x => {
-        if(x.isValid){
+
+      let loadedGridState = false;
+      if (this.getGridStateIdFromUrl) {
+        let viewId = this.getGridStateIdFromUrl();
+
+        if (viewId) {
+          this.loadGridState(viewId);
+          loadedGridState = true;
+        }
+      }
+
+      if(!loadedGridState){
+        this.getDefaultGridStateBasedOnUser().subscribe(x => {
+        if (x.isValid) {
           this.loadGridState(x.result.id);
+          loadedGridState = true;
         }
       });
+      }
+
     });
 
     this.copyLinkButtonId = this.grid.gridId + '_gridState_btnCopy';
   }
 
-  onLoadGridState(event: KeyValuePair<number, string>){
+  onLoadGridState(event: KeyValuePair<number, string>) {
     this.loadGridState(event.key);
   }
 
@@ -72,7 +89,7 @@ export class GridGridStateFeaturesComponent implements OnInit {
 
       this.saveAsNewGridState(gridStateName, this.grid.gridState).subscribe(x => {
         if (x.result) {
-          this.populateGridStateList().subscribe(x =>{
+          this.populateGridStateList().subscribe(x => {
             this.gridStateDropDownOptions = x.result.map(x => new KeyValuePair<number, string>(x.id, x.viewName));
             this.selectedGridState = x.result.find(x => x.includesGridState && x.viewName == gridStateName);
           });
@@ -93,8 +110,8 @@ export class GridGridStateFeaturesComponent implements OnInit {
         if (x.isValid) {
           this.gridStateDropDownOptions = this.gridStateDropDownOptions.filter(x => x.key != gridStateId);
           this.getDefaultGridStateBasedOnUser().subscribe(x => {
-            if(x.isValid){
-              if(x.result){
+            if (x.isValid) {
+              if (x.result) {
                 this.grid.setState(x.result.gridState);
                 this.selectedGridState = x.result;
               }
@@ -107,29 +124,29 @@ export class GridGridStateFeaturesComponent implements OnInit {
     }
   }
 
-  onSetGridStateAsDefault(gridStateId: number){
+  onSetGridStateAsDefault(gridStateId: number) {
     this.setGridStateAsDefault(gridStateId).subscribe(x => {
-      if(x.result){
+      if (x.result) {
         this.getGridStateById(gridStateId).subscribe(x => {
-          if(x.isValid){
+          if (x.isValid) {
             this.selectedGridState = x.result;
           }
-        })  
-      }else{
+        })
+      } else {
         alert(x.errorMessage);
       }
     });
   }
 
-  copyLink(){
+  copyLink() {
     let url = environment.link;
     let indexOfQueryString = url.indexOf(";");
 
-    if(indexOfQueryString > -1){
+    if (indexOfQueryString > -1) {
       url = url.substring(0, indexOfQueryString)
-    }else{
+    } else {
       let lastIndex = url.length - 1;
-      if(url.charAt(lastIndex) == "/"){
+      if (url.charAt(lastIndex) == "/") {
         url = url.substring(0, lastIndex);
       }
     }
@@ -139,18 +156,18 @@ export class GridGridStateFeaturesComponent implements OnInit {
     this.copyLinkTooltipVisibility = true;
   }
 
-  toggleSaveNewGridStateModalVisibility(){
+  toggleSaveNewGridStateModalVisibility() {
     this.saveAsNewGridStateModalVisibility = !this.saveAsNewGridStateModalVisibility;
   }
 
-  toggleDeleteGridStateConfirmModalVisbility(){
+  toggleDeleteGridStateConfirmModalVisbility() {
     this.deleteGridStateConfirmModalVisbility = !this.deleteGridStateConfirmModalVisbility;
   }
 
-  private loadGridState(gridState: number){
-    this.getGridStateById(gridState).subscribe(x =>{
-      if(x.isValid){
-        if(x.result){
+  private loadGridState(gridState: number) {
+    this.getGridStateById(gridState).subscribe(x => {
+      if (x.isValid) {
+        if (x.result) {
           this.grid.setState(x.result.gridState);
           this.selectedGridState = x.result;
         }

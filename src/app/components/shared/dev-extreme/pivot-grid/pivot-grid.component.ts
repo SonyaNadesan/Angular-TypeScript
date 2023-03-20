@@ -36,6 +36,7 @@ export class PivotGridComponent implements OnInit, IGrid {
   @Input() allowFieldDragging: boolean;
   @Input() fieldPanelVisible: boolean = true;
   @Input() allowCellNavigationUsingKeyboard: boolean;
+  @Input() enableCellSelection: boolean;
 
   @Output() onContextMenuPreparingEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCellPreparedEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -43,7 +44,7 @@ export class PivotGridComponent implements OnInit, IGrid {
   @Output() gridStateChangeEvent: EventEmitter<GridStateAndSharableStatus> = new EventEmitter<GridStateAndSharableStatus>();
   @Output() hasLoadedEvent: EventEmitter<boolean> = new EventEmitter();
 
-  gridState: string;
+  gridState: any;
 
   private cellCount: number = 0;
   private cells: KeyValuePair<string, any>[] = [];
@@ -56,9 +57,9 @@ export class PivotGridComponent implements OnInit, IGrid {
   }
 
   ngOnInit() {
-    if (this.allowCellNavigationUsingKeyboard) {
+    if (this.allowCellNavigationUsingKeyboard && this.enableCellSelection) {
       window.addEventListener("keydown", (event) => {
-        if (this.selectedCell) {
+        if (this.selectedCell && this.enableCellSelection) {
           console.log(this.selectedCell);
 
           let selectedCell = this.selectedCell[0];
@@ -73,32 +74,31 @@ export class PivotGridComponent implements OnInit, IGrid {
     this.hasLoadedEvent.emit(true);
   }
 
-  onCellPrepared(event) {
+  onCellPrepared(e) {
     this.cellCount = this.cellCount + 1;
 
-    event.cellElement[0].id = this.cellCount.toString();
+    e.cellElement[0].id = this.cellCount.toString();
 
-    this.cells.push(new KeyValuePair<string, any>(event.cellElement[0].id, event));
+    this.cells.push(new KeyValuePair<string, any>(e.cellElement[0].id, e));
 
-    let idAndValue = new KeyValuePair<string, number>(event.cellElement[0].id, event.cell.value);
+    let idAndValue = new KeyValuePair<string, number>(e.cellElement[0].id, e.cell.value);
 
     this.onCellPreparedEvent.emit(idAndValue);
   }
 
-  onCellClick(event) {
-    if (this.allowCellNavigationUsingKeyboard) {
+  onCellClick(e) {
+    if (this.allowCellNavigationUsingKeyboard && this.enableCellSelection) {
       if (this.selectedCell) {
         let currentCell = this.cells.find(x => x.key == this.selectedCell[0].id).value;
         currentCell.cellElement.removeClass("selectedCell");
       }
 
-      event.cellElement.addClass("selectedCell");
+      e.cellElement.addClass("selectedCell");
 
-      this.selectedCell = event.cellElement;
+      this.selectedCell = e.cellElement;
 
-      this.onCellClickEvent.emit(event);
+      this.onCellClickEvent.emit(e);
     }
-
   }
 
   onContextMenuPreparing(event) {

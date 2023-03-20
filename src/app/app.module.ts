@@ -14,7 +14,7 @@ import { RadiobuttonsComponent } from './components/shared/radiobuttons/radiobut
 import { TableComponent } from './components/shared/table/table.component';
 import { DateBoxComponent } from './components/shared/dev-extreme/date-box/date-box.component';
 import { DateRangeBoxComponent } from './components/shared/dev-extreme/date-range-box/date-range-box.component';
-import { DxButtonModule, DxCheckBoxModule, DxDataGridModule, DxDateBoxModule, DxPivotGridModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
+import { DxButtonModule, DxCheckBoxModule, DxDataGridModule, DxDateBoxModule, DxPivotGridModule, DxPopupModule, DxRadioGroupComponent, DxRadioGroupModule, DxSelectBoxModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
 import { GlobalSearchForDxDataGridComponent } from './components/shared/dev-extreme/global-search-for-dx-data-grid/global-search-for-dx-data-grid.component';
 import { DxoFieldPanelModule } from 'devextreme-angular/ui/nested';
 import { PivotGridComponent } from './components/shared/dev-extreme/pivot-grid/pivot-grid.component';
@@ -63,7 +63,8 @@ import { DataGridComponent } from './components/shared/dev-extreme/data-grid/dat
     DxTooltipModule,
     DxPopupModule,
     DxCheckBoxModule,
-    DxTextBoxModule
+    DxTextBoxModule,
+    DxRadioGroupModule
   ],
   providers: [],
   bootstrap: [AppComponent]

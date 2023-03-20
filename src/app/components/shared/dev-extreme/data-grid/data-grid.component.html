@@ -1,1 +1,107 @@
-<p>data-grid works!</p>
+<dx-data-grid [height]="height" #drillDownDataGrid [columnAutoWidth]="columnAutoWidth" [showBorders]="showBorders"
+  [allowColumnReordering]="allowColumnReordering" [rowAlternationEnabled]="rowAlternationEnabled"
+  [allowColumnResizing]="allowColumnResizing" [dataSource]="dataSource" (onCellPrepared)="onCellPrepared($event)"
+  (onEditorPreparing)="onEditorPreparing($event)"
+  (onCellClick)="onCellClick($event)" (onCellDblClick)="onCellDblClick($event)" (onRowPrepared)="onRowPrepared($event)"
+  (onEditingStart)="setEditStatus('Update_Start')"
+  (onInitNewRow)="setEditStatus('Create_Start')"
+  (onRowInserting)="setEditStatus('Create_Start')"
+  (onRowInserted)="setEditStatus('Create_Complete')"
+  (RowUpdating)="setEditStatus('Update_Start')"
+  (onRowUpdated)="setEditStatus('Update_Complete')"
+  (onRowRemoving)="setEditStatus('Delete_Start')"
+  (onRowRemoved)="setEditStatus('Delete_Complete')"
+  (onSaved)="onSaving($event)"
+  (onEditCanceling)="setEditStatus('Edit_Cancelled')"
+  (onEditCanceled)="setEditStatus('Edit_Cancelled')"
+  >
+
+  <dxo-toolbar>
+    <dxi-item location="before">
+      <div *dxTemplate>
+        <div style="display:inline-block">
+          <ng-container *ngIf="!onlyShowCopyMode">
+            <dx-radio-group [items]="gridModes" [value]="selectedGridMode" layout="horizontal"
+              (onValueChanged)="onToggleBetweenCopyAndEditMode($event)"></dx-radio-group>
+          </ng-container>
+        </div>
+      </div>
+    </dxi-item>
+    <dxi-item location="after">
+      <div *dxTemplate>
+        <ng-container *ngIf="selectedGridMode == gridModes[0]">
+        <div style="display:inline-block;"> Double-click to select: </div>
+        <div style="display:inline-block;">
+          <dx-radio-group [items]="copyByModes" [value]="selectedCopyByMode" layout="horizontal"
+            (onValueChanged)="onToggleCopyByMode($event)"></dx-radio-group>
+        </div>
+        <div style="display:inline-block">
+          <dx-button icon="info" (click)="toggleInfoModalVisibility()"></dx-button>
+        </div>
+      </ng-container>
+      </div>
+    </dxi-item>
+  </dxo-toolbar>
+
+  <dxo-column-chooser [enabled]="columnChooserEnabled" [mode]="columnChooserMode"></dxo-column-chooser>
+
+  <dxo-export [enabled]="exportEnabled"></dxo-export>
+
+  <dxo-editing [mode]="editMode" [allowAdding]="allowAdding" [allowUpdating]="allowUpdating"
+    [allowDeleting]="columns.showDeleteColumn" [selectTextOnEditStart]="selectTextOnEditStart">
+  </dxo-editing>
+
+  <ng-container *ngFor="let column of columnsList">
+    <ng-container *ngIf="column.lookupValues">
+      <dxi-column [dataField]="column.column.dataField" [caption]="column.column.caption">
+        <dxo-lookup [dataSource]="column.lookupValues" [valueExpr]="column.valueExpression"
+          [displayExpr]="column.displayExpression"></dxo-lookup>
+      </dxi-column>
+    </ng-container>
+    <ng-container *ngIf="!column.lookupValues">
+      <ng-container *ngIf="column.dataType == 'string'">
+        <dxi-column [dataField]="column.dataField" [caption]="column.caption"
+          [allowEditing]="column.allowEditing"></dxi-column>
+      </ng-container>
+      <ng-container *ngIf="column.dataType == 'number'">
+        <dxi-column [dataField]="column.dataField" [caption]="column.caption" [allowEditing]="column.allowEditing"
+          [showInColumnChooser]="column.showInColumnChooser">
+          <dxo-format [type]="column.type" [precision]="column.precision">
+          </dxo-format>
+        </dxi-column>
+      </ng-container>
+      <ng-container *ngIf="column.dataType == 'date'">
+        <dxi-column [dataField]="column.dataField" [caption]="column.caption" dataType="date" [format]="column.format"
+          [allowEditing]="column.allowEditing" [showInColumnChooser]="column.showInColumnChooser"></dxi-column>
+      </ng-container>
+      <ng-container *ngIf="column.dataType == 'button'">
+        <dxi-column type="buttons" [caption]="column.caption">
+          <dxi-button [text]="column.text" [icon]="column.icon" [hint]="column.hint" [onClick]="column.onClick">
+          </dxi-button>
+        </dxi-column>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <dxo-state-storing [enabled]="true" type="custom" [customSave]="saveState"></dxo-state-storing>
+
+  <dxo-filter-row [visible]="showFilterRow"></dxo-filter-row>
+  <dxo-sorting [mode]="sortingMode"></dxo-sorting>
+  <dxo-header-filter [visible]="headerFilterVisible"></dxo-header-filter>
+
+</dx-data-grid>
+
+<dx-popup [width]="500" [height]="250" [showTitle]="true" title="Info" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [showCloseButton]="true" container=".dx-viewport"
+    [(visible)]="infoModalVisibility">
+    <dxo-position at="middle" my="center">
+    </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+        <ul>
+          <li>Click on a cell to select it</li>
+          <li>Double-click on a cell to select an entire column or row (depends on user's selected <b>copy mode</b>)</li>
+          <li>Press and hold the CNTRL key to select multiple cells/columns/rows</li>
+          <li>Presss and hold CNTRL+C to copy selected cells; the feature is Excel friendly</li>
+        </ul>
+    </div>
+</dx-popup>

@@ -5,7 +5,6 @@ import { UserDefinedView } from 'src/app/models/UserDefinedView';
 import { FiltersInUseStatus } from 'src/app/models/FiltersInUseStatus';
 import { KeyValuePair } from 'src/app/models/KeyValuePair';
 import { ServiceResponse } from 'src/app/models/ServiceResponse';
-import { PivotGridComponent } from '../pivot-grid/pivot-grid.component';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { IGrid } from 'src/app/models/IGrid';
