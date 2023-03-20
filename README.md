@@ -19,7 +19,7 @@ This project was set up to explore Angular and develop reusable components/servi
 - Global Search Feature for DxDataGrid
 - DxPivotGridBuilder & DxPivotGridFieldBuilder
 - Arrow Key Navigation for table structures including the DxPivotGrid
-- Multiple Cell/Column Selection & Copy (selection on CNTRL, copy on CNTRL+C)
+- Multiple Cell/Column/Row Selection & Copy (selection on CNTRL, copy on CNTRL+C)
 - Creating/Loading/Deleting/ Grid States & Filter Sets (GridConfigurationPanel, GridFilterSetFeatures/GridGriStateFeatures)
 - Setting Grid States as Default(GridGriStateFeatures)
 - Copy Link to Grid States/Filter Sets (GridFilterSetFeatures/GridGriStateFeatures)
